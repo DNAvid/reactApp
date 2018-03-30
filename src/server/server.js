@@ -22,6 +22,10 @@ app.get('/', function (req, res) {
 app.get('/public/bundle.js', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/public/bundle.js')
 })
+
+app.get(':443/callback', function (req, res) {
+	res.sendFile('/home/davidweisss/reactApp/src/client/public/bundle.js')
+})
 app.get('*', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/index.html')
 })
