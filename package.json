@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "sudo node src/server/server.js",
     "build": "sudo node_modules/.bin/webpack",
-    "watch": "sudo node_modules/.bin/webpack --watch --info-verbosity verbose"
+    "watch": "sudo node_modules/.bin/webpack --watch --info-verbosity verbose",
+    "deploy": "npm run build; npm run serve"
   },
   "author": "",
   "license": "MIT",
