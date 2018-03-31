@@ -78,6 +78,7 @@ const handleAuthentication = ({location}) => {
 }
 
 
+
 class App extends Component {
         goTo(route) {
                 this.props.history.replace(`/${route}`)
@@ -91,8 +92,10 @@ class App extends Component {
                 this.props.auth.logout();
         }
 
+
         render() {
                 const { isAuthenticated } = this.props.auth;
+
 
                 return (
                         <div>
@@ -102,8 +105,8 @@ class App extends Component {
                         <a href="#">Auth0 - React</a>
                         </Navbar.Brand>
                         <Button
+                        style={{marginLeft: '7px',marginTop: '5px'}}
                         bsStyle="primary"
-                        className="btn-margin"
                         onClick={this.goTo.bind(this, 'home')}
                         >
                         Home
@@ -112,8 +115,8 @@ class App extends Component {
                                 !isAuthenticated() && (
                                         <Button
                                         id="qsLoginBtn"
+                                        style={{marginLeft: '7px',marginTop: '5px'}}
                                         bsStyle="primary"
-                                        className="btn-margin"
                                         onClick={this.login.bind(this)}
                                         >
                                         Log In
@@ -124,6 +127,7 @@ class App extends Component {
                                 isAuthenticated() && (
                                         <Button
                                         id="qsLogoutBtn"
+                                        style={{marginLeft: '7px',marginTop: '5px'}}
                                         bsStyle="primary"
                                         className="btn-margin"
                                         onClick={this.logout.bind(this)}
