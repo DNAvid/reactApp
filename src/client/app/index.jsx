@@ -1,15 +1,16 @@
-import  { render } from 'react-dom';
-import React, { Component } from 'react';
-import { Router, Route, Link } from 'react-router-dom'
-import { Navbar, Button } from 'react-bootstrap';
-import auth0 from 'auth0-js';
-//import './index.css';
-//import 'bootstrap/dist/css/bootstrap.css';
-import history from './history';
-//import loading from './loading.svg';
+import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from './auth0_variables'
+import  { render } from 'react-dom'
+import React, { Component } from 'react'
+import { Router, Route, Link } from 'react-router-dom'
+import { Navbar, Button } from 'react-bootstrap'
+//import './index.css'
+//import 'bootstrap/dist/css/bootstrap.css'
+import history from './history'
+//import loading from './loading.svg'
+import axios from 'axios'
 
-export default class Auth {
+class Auth {
         constructor() {
                 this.auth0 = new auth0.WebAuth({
                         domain: AUTH_CONFIG.domain,
@@ -77,8 +78,6 @@ const handleAuthentication = ({location}) => {
         }
 }
 
-
-
 class App extends Component {
         goTo(route) {
                 this.props.history.replace(`/${route}`)
@@ -99,84 +98,63 @@ class App extends Component {
 
                 return (
                         <div>
-                        <Navbar fluid>
-                        <Navbar.Header>
-                        <Navbar.Brand>
-                        <a href="#">Auth0 - React</a>
-                        </Navbar.Brand>
-                        <Button
-                        style={{marginLeft: '7px',marginTop: '5px'}}
-                        bsStyle="primary"
-                        onClick={this.goTo.bind(this, 'home')}
-                        >
-                        Home
-                        </Button>
-                        {
-                                !isAuthenticated() && (
-                                        <Button
-                                        id="qsLoginBtn"
-                                        style={{marginLeft: '7px',marginTop: '5px'}}
-                                        bsStyle="primary"
-                                        onClick={this.login.bind(this)}
-                                        >
-                                        Log In
+                                <Navbar fluid>
+                                        <Navbar.Header>
+                                                <Navbar.Brand>
+                                                        <a href="#">DNA\/ID</a>
+                                                </Navbar.Brand>
+
+                                                <Button
+                                                        style={{marginLeft: '7px',marginTop: '5px'}}
+                                                        bsStyle="primary"
+                                                        onClick={this.goTo.bind(this, 'home')}
+                                                >
+
+                                                Home
+
                                         </Button>
-                                )
-                        }
-                        {
-                                isAuthenticated() && (
+
                                         <Button
-                                        id="qsLogoutBtn"
-                                        style={{marginLeft: '7px',marginTop: '5px'}}
-                                        bsStyle="primary"
-                                        className="btn-margin"
-                                        onClick={this.logout.bind(this)}
+                                                style={{marginLeft: '7px',marginTop: '5px'}}
+                                                bsStyle="primary"
+                                                onClick={this.goTo.bind(this, 'wallet')}
                                         >
-                                        Log Out
-                                        </Button>
-                                )
-                        }
+
+                                        Wallet
+
+                                </Button>
+
+                                {
+                                        !isAuthenticated() && (
+                                                <Button
+                                                        id="qsLoginBtn"
+                                                        style={{marginLeft: '7px',marginTop: '5px'}}
+                                                        bsStyle="primary"
+                                                        onClick={this.login.bind(this)}
+                                                >
+                                                        Log In
+                                                </Button>
+                                        )
+                                }
+                                {
+                                        isAuthenticated() && (
+                                                <Button
+                                                        id="qsLogoutBtn"
+                                                        style={{marginLeft: '7px',marginTop: '5px'}}
+                                                        bsStyle="primary"
+                                                        className="btn-margin"
+                                                        onClick={this.logout.bind(this)}
+                                                >
+                                                        Log Out
+                                                </Button>
+                                        )
+                                }
                         </Navbar.Header>
-                        </Navbar>
-                        </div>
+                </Navbar>
+        </div>
                 );
         }
 }
-
-class Home extends Component {
-        login() {
-                this.props.auth.login();
-        }
-        render() {
-                const { isAuthenticated } = this.props.auth;
-                return (
-                        <div className="container">
-                        {
-                                isAuthenticated() && (
-                                        <h4>
-                                        You are logged in!
-                                        </h4>
-                                )
-                        }
-                        {
-                                !isAuthenticated() && (
-                                        <h4>
-                                        You are not logged in! Please{' '}
-                                        <a
-                                        style={{ cursor: 'pointer' }}
-                                        onClick={this.login.bind(this)}
-                                        >
-                                        Log In
-                                        </a>
-                                        {' '}to continue.
-                                        </h4>
-                                )
-                        }
-                        </div>
-                );
-        }
-}
-
 
 class Callback extends Component {
         render() {
@@ -195,26 +173,133 @@ class Callback extends Component {
 
                 return (
 
-                        <div style={style}>
+                <div style={style}>
                         Loading...
+                </div>
+                );
+        }
+}
+
+class Home extends Component {
+        login() {
+                this.props.auth.login();
+        }
+        render() {
+                const { isAuthenticated } = this.props.auth;
+                return (
+                        <div className="container">
+                                {
+                                        isAuthenticated() && (
+                                                <h4>
+                                                        You are logged in!
+                                                </h4>
+                                        )
+                                }
+                                {
+                                        !isAuthenticated() && (
+                                                <h4>
+                                                        You are not logged in! Please{' '}
+                                                        <a
+                                                                style={{ cursor: 'pointer' }}
+                                                                onClick={this.login.bind(this)}
+                                                        >
+                                                                Log In
+                                                        </a>
+                                                        {' '}to continue.
+                                                </h4>
+                                        )
+                                }
                         </div>
                 );
         }
 }
 
+class Wallet extends Component {
+
+        constructor(props){
+                    super(props)
+                this.state = {walletBalance: 'Loading ...',
+                addressBalance: 'Loading...'}
+                  }
+
+        componentDidMount() {
+
+                function getWalletBalance(){
+                        return axios({
+                                url:'https://dnavidbitcoin.com/balance', 
+                                method: 'get',
+                                headers: {'Content-Type':'text/plain'}
+                        }
+                        )
+                }
+
+                function getAddressBalance(){
+                        return axios({
+                                url:'https://dnavidbitcoin.com/address.3NpQWeMPDnmiRwPs4j8q1cB7a5qNgLyAGy', 
+                                method: 'get',
+                                headers: {'Content-Type':'text/plain'}
+                        }
+                        )
+                }
+                axios.all([getWalletBalance(),getAddressBalance()])        
+                        .then(axios.spread( (wBalance, aBalance) => {
+                                this.setState({walletBalance: wBalance.data})
+                                this.setState({addressBalance: aBalance.data})
+                        }
+                        )
+                        ) 
+        }
+
+        login() {
+                this.props.auth.login();
+        }
+
+        render() {
+                const { isAuthenticated } = this.props.auth;
+                return (
+                        <div className="container">
+                                {
+                                        isAuthenticated() && (
+                                                <h4>
+                                                        You are logged in! This is your wallet balance: {this.state.addressBalance}. (total balance: {this.state.walletBalance}).
+                                                </h4>
+                                        )
+                                }
+                                {
+                                        !isAuthenticated() && (
+                                                <h4>
+                                                        You are not logged in! Please{' '}
+                                                        <a
+                                                                style={{ cursor: 'pointer' }}
+                                                                onClick={this.login.bind(this)}
+                                                        >
+                                                                Log In
+                                                        </a>
+                                                        {' '}to see your wallet balance. (total balance: {this.state.walletBalance}).
+                                                </h4>
+                                        )
+                                }
+                        </div>
+                );
+        }
+}
+
+
+
 const makeMainRoutes = () => {
-        return (
-                <Router history={history}>
-                 <div>
-                  <Route path="/" render={(props) => <App auth={auth} {...props} />} />
-                  <Route path="/home" render={(props) => <Home auth={auth} {...props}/>} /> 
-                  <Route path="/callback" render={(props) => {
-                        handleAuthentication(props);
-                        return <Callback {...props} /> }}
-                  />
-                 </div>
-                </Router>
-        );
+return (
+        <Router history={history}>
+                <div>
+                        <Route path="/" render={(props) => <App auth={auth} {...props} />} />
+                        <Route path="/home" render={(props) => <Home auth={auth} {...props}/>} /> 
+                        <Route path="/wallet" render={(props) => <Wallet auth={auth} {...props}/>} /> 
+                        <Route path="/callback" render={(props) => {
+                                handleAuthentication(props);
+                                return <Callback {...props} /> }}
+                        />
+                </div>
+        </Router>
+);
 }
 
 const routes = makeMainRoutes();

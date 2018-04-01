@@ -8,7 +8,7 @@
     "serve": "sudo node src/server/server.js",
     "build": "sudo node_modules/.bin/webpack",
     "watch": "sudo node_modules/.bin/webpack --watch --info-verbosity verbose",
-    "deploy": "npm run build; npm run serve",
+    "deploy": "npm run build && npm run serve",
     "dev": "sudo node_modules/.bin/webpack-dev-server --https --key src/server/server.key --cert src/server/server.crt"
   },
   "author": "",
@@ -16,6 +16,7 @@
   "dependencies": {
     "auth0-js": "^9.4.2",
     "auth0-lock": "^11.5.2",
+    "axios": "^0.18.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
