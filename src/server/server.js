@@ -23,9 +23,10 @@ app.get('/public/bundle.js', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/public/bundle.js')
 })
 
-app.get('*', function (req, res) {
+app.get('/*', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/index.html')
 })
+
 
 server = https.createServer(https_options, app).listen(PORT, HOST);
 console.log('HTTPS Server listening on %s:%s', HOST, PORT);

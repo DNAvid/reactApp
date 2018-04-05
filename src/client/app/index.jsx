@@ -1,15 +1,17 @@
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider, connect } from 'react-redux'
 import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from './auth0_variables'
 import  { render } from 'react-dom'
 import React, { Component } from 'react'
 import { Router, Route, Link } from 'react-router-dom'
-import { Navbar, Button } from 'react-bootstrap'
-//import './index.css'
-//import 'bootstrap/dist/css/bootstrap.css'
+import { Navbar, Button, Row, Col, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 import history from './history'
 //import loading from './loading.svg'
 import axios from 'axios'
 
+// From Auth0 React samples
 class Auth {
         constructor() {
                 this.auth0 = new auth0.WebAuth({
@@ -29,7 +31,6 @@ class Auth {
         login() {
                 this.auth0.authorize();
         }
-
         handleAuthentication() {
                 this.auth0.parseHash((err, authResult) => {
                         if (authResult && authResult.accessToken && authResult.idToken) {
@@ -70,13 +71,42 @@ class Auth {
         }
 }
 
-const auth = new Auth();
 
-const handleAuthentication = ({location}) => {
-        if (/access_token|id_token|error/.test(location.hash)) {
-                auth.handleAuthentication();
+// Presentation component template
+const FieldGroup = (id, label, help, ...props) => 
+{<FormGroup controlId={id}>
+        <ControlLabel>{label}</ControlLabel>
+        <FormControl {...props} />
+        {help && <HelpBlock>{help}</HelpBlock>}
+</FormGroup>}
+
+// User DB API using webtasks and and Mongo DB
+const getUser = (id_token) =>  axios({
+        baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+        url: 'testForNewUser',
+        method: 'get',
+        headers: {
+                'Authorization': 'Bearer ' +  id_token,
         }
+})
+
+const setUser = props => {
+        axios({
+                baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+                url: 'updateUser.js',
+                params: {
+                        category: props.category,
+                        key: props.key,
+                        text: props.text,
+                        json: props.json
+                },
+                method: 'post',
+                headers: {
+                        Authorization: 'Bearer ' +  localStorage.id_token
+                }
+        })
 }
+
 
 class App extends Component {
         goTo(route) {
@@ -92,9 +122,9 @@ class App extends Component {
         }
 
 
+
         render() {
                 const { isAuthenticated } = this.props.auth;
-
 
                 return (
                         <div>
@@ -107,75 +137,50 @@ class App extends Component {
                                                 <Button
                                                         style={{marginLeft: '7px',marginTop: '5px'}}
                                                         bsStyle="primary"
-                                                        onClick={this.goTo.bind(this, 'home')}
-                                                >
+                                                        onClick={this.goTo.bind(this, 'home')}>
 
-                                                Home
+                                                        Home
 
-                                        </Button>
+                                                </Button>
 
-                                        <Button
-                                                style={{marginLeft: '7px',marginTop: '5px'}}
-                                                bsStyle="primary"
-                                                onClick={this.goTo.bind(this, 'wallet')}
-                                        >
-
-                                        Wallet
-
-                                </Button>
-
-                                {
-                                        !isAuthenticated() && (
                                                 <Button
-                                                        id="qsLoginBtn"
                                                         style={{marginLeft: '7px',marginTop: '5px'}}
                                                         bsStyle="primary"
-                                                        onClick={this.login.bind(this)}
-                                                >
-                                                        Log In
+                                                        onClick={this.goTo.bind(this, 'wallet')}>
+
+                                                        Wallet
+
                                                 </Button>
-                                        )
-                                }
-                                {
-                                        isAuthenticated() && (
-                                                <Button
-                                                        id="qsLogoutBtn"
-                                                        style={{marginLeft: '7px',marginTop: '5px'}}
-                                                        bsStyle="primary"
-                                                        className="btn-margin"
-                                                        onClick={this.logout.bind(this)}
-                                                >
-                                                        Log Out
-                                                </Button>
-                                        )
-                                }
-                        </Navbar.Header>
-                </Navbar>
-        </div>
-                );
-        }
-}
 
-class Callback extends Component {
-        render() {
-                const style = {
-                        position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        height: '100vh',
-                        width: '100vw',
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        backgroundColor: 'white',
-                }
 
-                return (
+                                                {
+                                                        !isAuthenticated() && 
+                                                                <Button
+                                                                        id="qsLoginBtn"
+                                                                        style={{marginLeft: '7px',marginTop: '5px'}}
+                                                                        bsStyle="primary"
+                                                                        onClick={this.login.bind(this)}>
 
-                <div style={style}>
-                        Loading...
-                </div>
+                                                                        Log In
+
+                                                                </Button>
+                                                        
+                                                }
+                                                {
+                                                        isAuthenticated() && 
+                                                                <Button
+                                                                        id="qsLogoutBtn"
+                                                                        style={{marginLeft: '7px',marginTop: '5px'}}
+                                                                        bsStyle="primary"
+                                                                        onClick={this.logout.bind(this)}>
+                                                                        Log Out
+                                                                </Button>
+                                                        
+                                                }
+                                        </Navbar.Header>
+                                </Navbar>
+                        </div>
+
                 );
         }
 }
@@ -185,44 +190,53 @@ class Home extends Component {
                 this.props.auth.login();
         }
         render() {
-                const { isAuthenticated } = this.props.auth;
+                const  {isAuthenticated}  = this.props.auth
+                const isRegistered = this.props.store.getState().pseudo
                 return (
-                        <div className="container">
-                                {
-                                        isAuthenticated() && (
-                                                <h4>
-                                                        You are logged in!
-                                                </h4>
-                                        )
+                        <div>
+                                {isAuthenticated() && Boolean(isRegistered) && 
+                                <h4>Hi {isRegistered}!</h4>
                                 }
-                                {
-                                        !isAuthenticated() && (
-                                                <h4>
-                                                        You are not logged in! Please{' '}
-                                                        <a
-                                                                style={{ cursor: 'pointer' }}
-                                                                onClick={this.login.bind(this)}
-                                                        >
-                                                                Log In
-                                                        </a>
-                                                        {' '}to continue.
-                                                </h4>
-                                        )
+                                { isAuthenticated() && !Boolean(isRegistered) && 
+                                <Pseudo />
+                                }
+                                { !isAuthenticated() && 
+                                <h4>
+                                        You are not logged in! Please{' '}
+                                        <a
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={this.login.bind(this)}
+                                        >
+                                                Log In
+                                        </a>
+                                        {' '}to continue.
+                                </h4>
                                 }
                         </div>
                 );
         }
 }
 
+class Pseudo extends Component {
+        render() {
+        return <Row>
+                <Col xs={6} sm={5} md={4} lg={2}>
+                        <h4>Choose your Pseudo</h4>
+                        <Button type="submit"> Choose</Button>
+                </Col>
+        </Row>
+        }
+}
+
 class Wallet extends Component {
 
         constructor(props){
-                    super(props)
+                super(props)
                 this.state = {walletBalance: 'Loading ...',
-                addressBalance: 'Loading...'}
-                  }
+                        addressBalance: 'Loading...'}
+        }
 
-        componentDidMount() {
+        componentWillMount() {
 
                 function getWalletBalance(){
                         return axios({
@@ -284,28 +298,77 @@ class Wallet extends Component {
         }
 }
 
+class Callback extends Component {
+        componentDidMount(){
+                if(localStorage.id_token){this.props.store.dispatch(initSetPseudo(localStorage.id_token))}
+        
+        }
+        render() {
 
+                return (
 
-const makeMainRoutes = () => {
-return (
-        <Router history={history}>
-                <div>
-                        <Route path="/" render={(props) => <App auth={auth} {...props} />} />
-                        <Route path="/home" render={(props) => <Home auth={auth} {...props}/>} /> 
-                        <Route path="/wallet" render={(props) => <Wallet auth={auth} {...props}/>} /> 
-                        <Route path="/callback" render={(props) => {
-                                handleAuthentication(props);
-                                return <Callback {...props} /> }}
-                        />
+                <div> 
+                        Loading...
                 </div>
-        </Router>
-);
+                );
+        }
 }
 
-const routes = makeMainRoutes();
+// InitiaL state
+const initialProfile = {
+        pseudo: '' 
+}
+//Actions
 
+var setPseudo = pseudo => ({type:'SET_PSEUDO', pseudo})
+
+var initSetPseudo = id_token =>{
+        return function(dispatch){
+                return getUser(id_token).then(
+                        res => {
+                                console.log('pseudo is:', res.data._id); 
+                                dispatch(setPseudo(res.data._id))
+                        },
+                        console.log('error in API endpoint.')
+                )}
+}
+
+// Reducer
+function profileReducer(state = initialProfile, action) {
+        switch(action.type) {
+                case 'SET_PSEUDO':
+                        return {...state, pseudo: action.pseudo};
+
+                default:
+                        return state;
+        }
+}
+
+// Create store
+const store = createStore(profileReducer, applyMiddleware(thunk))
+
+const auth = new Auth();
+
+const handleAuthentication = ({location}) => {
+        if (/access_token|id_token|error/.test(location.hash)) {
+                auth.handleAuthentication();
+        }
+
+}
 render(
-        routes,
+        <Provider store={store}>
+                <Router history={history}>
+                        <div>
+                                <Route path="/" render={(props) => <App store={store} auth={auth} {...props} />} />
+                                <Route path="/home" render={(props) => <Home store={store} auth={auth} {...props}/>} /> 
+                                <Route path="/wallet" render={(props) => <Wallet store={store} auth={auth} {...props}/>} /> 
+                                <Route path="/callback" render={(props) => {
+                                        handleAuthentication(props);
+                                        return <Callback store={store} auth={auth} {...props} /> }}
+                                />
+                        </div>
+                </Router>
+        </Provider>,
         document.getElementById('root')
 );
 
