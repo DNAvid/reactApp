@@ -5,8 +5,8 @@ var cert = fs.readFileSync('src/server/server.crt');
 var https = require('https');
 var http = require('http');
 var express = require('express');
-var serveStatic = require('serve-static')
-var fs = require('fs')
+var serveWebpackClient = require('serve-webpack-client')
+
 var https_options = {
 	key: key,
 	cert: cert
@@ -14,7 +14,13 @@ var https_options = {
 
 var PORT = 443;
 var HOST = '0.0.0.0';
+console.log()
 app = express();
+app.use(serveWebpackClient({
+          distPath: '/dist', // Used in prod 
+          indexFileName: 'index.html',
+        webpackConfig: require('/home/davidweisss/reactApp/webpack.config.js') // Used for dev. 
+}));
 app.get('/', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/index.html')
 })
