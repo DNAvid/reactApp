@@ -1,4 +1,3 @@
-import { Navbar, Button, Row, Col } from 'react-bootstrap'
 import React, { Component } from 'react'
 import  Pseudo from './Pseudo.jsx'
 
