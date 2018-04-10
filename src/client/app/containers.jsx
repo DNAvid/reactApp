@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Navbar, Button, Row, Col } from 'react-bootstrap'
 import React, { Component } from 'react'
-
+import { InitSetPseudo } from './actions.jsx'
 export class App extends Component {
         goTo(route) {
                 this.props.history.replace(`/${route}`)
@@ -87,7 +87,7 @@ export class Home extends Component {
                 const  {isAuthenticated}  = this.props.auth
                 const isRegistered = this.props.store.getState().pseudo
                 return (
-                        <div>
+                        <div className='container'>
                                 {isAuthenticated() && Boolean(isRegistered) && 
                                 <h4>Hi {isRegistered}!</h4>
                                 }
