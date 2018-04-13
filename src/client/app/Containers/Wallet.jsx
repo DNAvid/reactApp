@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 
+const MapStateToProps = state => ({isAuthenticated: isAuthenticated})
 
-
-export default class Wallet extends Component {
+class WalletNC extends Component {
 
         constructor(props){
                 super(props)
@@ -40,22 +41,23 @@ export default class Wallet extends Component {
         }
 
         login() {
-                this.props.auth.login();
+                this.props.webAuth.authorize();
         }
 
         render() {
-                const { isAuthenticated } = this.props.auth;
+                let isAuthenticated = this.props.isAuthenticated
+                const emptyPseudo =  Boolean(pseudo.length()) 
                 return (
                         <div className="container">
                                 {
-                                        isAuthenticated() && (
+                                        isAuthenticated && (
                                                 <h4>
                                                         You are logged in! This is your wallet balance: {this.state.addressBalance}. (total balance: {this.state.walletBalance}).
                                                 </h4>
                                         )
                                 }
                                 {
-                                        !isAuthenticated() && (
+                                        !isAuthenticated && (
                                                 <h4>
                                                         You are not logged in! Please{' '}
                                                         <a
@@ -73,4 +75,5 @@ export default class Wallet extends Component {
         }
 }
 
-
+const Wallet = connect(MapStateToProps)(WalletNC)
+export default Wallet

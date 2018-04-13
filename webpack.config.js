@@ -26,7 +26,13 @@ var config = {
                         }
                 ]
         },
-        mode: 'production'
+        mode: 'development',
+        devtool: "#cheap-module-source-map",
+        plugins: [
+                     new webpack.LoaderOptionsPlugin({
+                                    debug: true
+                                  })
+                   ]
 };
 
 module.exports = config;
