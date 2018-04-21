@@ -1,76 +1,78 @@
-import { connect } from 'react-redux'
-import React, { Component } from 'react'
-import  Pseudo from './Pseudo.jsx'
+import { Alert, Panel, Button, FormGroup, ControlLabel, FormControl, HelpBlock, Row, Col, Grid, Image } from 'react-bootstrap'
+import React from 'react'
+import { AlertDismissable, SetProfilePicture, SetProfileBio, SetProfileDetails } from '../components.jsx'
 
-const MapStateToProps = state => ({
-        isAuthenticated: state.session.isAuthenticated,
-        isFetching: state.user.isFetching,
-        pseudo: state.user.pseudo})
 
-class HomeNC extends Component {
+class Home extends React.Component {
         constructor(props)
         {
                 super(props)
-                this.login = this.login.bind(this)
+                this.handleDelete = this.props.handleDelete.bind(this)
         }
-        login() {
-                this.props.webAuth.authorize();
+
+        handleDelete(e) {
+                e.preventDefault()
+                this.props.deletePseudo(this.props.session.id_token, this.props.session.pseudo)
+                return false
         }
+
+        componentWillMount(){
+                this.props.getUserDetail('user') 
+        
+        }
+        handleSubmit(userDetails){
+                this.props.setUserDetail(userDetails) 
+        }
+        
         render() {
-                const  isAuthenticated  = this.props.isAuthenticated
-                const  isFetching= this.props.isFetching
-                const pseudo = this.props.pseudo
-                const emptyPseudo =  !Boolean(pseudo.length) 
+
+                var {
+                        isGetting,
+                        isSetting,
+                        firstName,
+                        lastName,
+                        email,
+                        phone,
+                        picture,
+                        bio
+                } = this.props.user
+
+                var pseudo = this.props.session.pseudo
+
                 return (
+
                         <div className='container'>
-                                                { !isFetching && isAuthenticated && !emptyPseudo &&
-
-                                                <h4>Hi {pseudo}!</h4>
-                                                }
-                                                { !isFetching && isAuthenticated && emptyPseudo &&
-                                                <Pseudo />
-                                                }
-                                                { !isFetching && !isAuthenticated && 
-                                                <h4>
-                                                        You are not logged in! Please{' '}
-                                                        <a
-                                                                style={{ cursor: 'pointer' }}
-                                                                onClick={this.login.bind(this)}
-                                                        >
-                                                                Log In
-                                                        </a>
-                                                        {' '}to continue.
-                                                </h4>
-                                                }
-
-                                        
+                                
+                                <div>
+                                        <h4>Public profile</h4>
+                                        { isGetting && !isSetting && (
+                                                <h4>Checking for your personal info...</h4>
+                                        ) }
+                                        { !isGetting && !isSetting &&
+                                        <SetProfilePicture 
+                                                pseudo={pseudo} 
+                                                setUserDetail={setUserDetail}/>
+                                        <SetProfileBio 
+                                                bio={bio}
+                                                setUserDetail={setUserDetail}/>
+                                        <SetProfileDetails 
+                                                firstName= {firstName}
+                                                lastName = {lastName}
+                                                email    = {email}
+                                                phone    = {phone}
+                                                setUserDetail={setUserDetail}
+                                        />}
+                                        {!isGetting && isSetting && (
+                                                <h4>Remembering your personal information...</h4>)}
+                                        <h4>Download and delete my Data</h4>
+                                        <AlertDismissable handleDelete={this.handleDelete}/>
                                 </div>
+                                }
+
+
+                        </div>
                 );
         }
 }
 
-const Home = connect(
-        MapStateToProps
-)(HomeNC)
 export default Home 
-
-
-
-{/*                                {isAuthenticated && isRegistered && typeof pseudo !== 'undefined' && 
-                                <h4>Hi {pseudo}!</h4>
-                                }
-                                { isAuthenticated && !isRegistered && 
-                                <Pseudo />
-                                }
-                                { !isAuthenticated && 
-                               <h4>
-                                        You are not logged in! Please{' '}
-                                        <a
-                                                style={{ cursor: 'pointer' }}
-                                                onClick={this.login.bind(this)}
-                                        >
-                                                Log In
-                                        </a>
-                                        {' '}to continue.
-                                </h4>
-                                } */}

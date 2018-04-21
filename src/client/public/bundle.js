@@ -58597,6 +58597,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -58646,56 +58648,96 @@ var AppNC = function (_Component) {
                 value: function render() {
                         var isAuthenticated = this.props.isAuthenticated;
                         return _react2.default.createElement(
-                                'div',
-                                null,
+                                _reactBootstrap.Navbar,
+                                { collapseOnSelect: true },
                                 _react2.default.createElement(
-                                        _reactBootstrap.Navbar,
-                                        { fluid: true },
+                                        _reactBootstrap.Navbar.Header,
+                                        null,
                                         _react2.default.createElement(
-                                                _reactBootstrap.Navbar.Header,
+                                                _reactBootstrap.Navbar.Brand,
                                                 null,
                                                 _react2.default.createElement(
-                                                        _reactBootstrap.Navbar.Brand,
+                                                        _reactBootstrap.Navbar.Text,
                                                         null,
                                                         _react2.default.createElement(
-                                                                'a',
-                                                                { href: '#' },
+                                                                _reactRouterDom.Link,
+                                                                { to: '' },
                                                                 'DNA\\/ID'
                                                         )
-                                                ),
-                                                _react2.default.createElement(
-                                                        _reactBootstrap.Button,
-                                                        {
-                                                                style: { marginLeft: '7px', marginTop: '5px' },
-                                                                bsStyle: 'primary',
-                                                                onClick: this.goTo.bind(this, 'home') },
-                                                        'Home'
-                                                ),
-                                                _react2.default.createElement(
-                                                        _reactBootstrap.Button,
-                                                        {
-                                                                style: { marginLeft: '7px', marginTop: '5px' },
-                                                                bsStyle: 'primary',
-                                                                onClick: this.goTo.bind(this, 'wallet') },
-                                                        'Wallet'
-                                                ),
+                                                )
+                                        ),
+                                        _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+                                ),
+                                _react2.default.createElement(
+                                        _reactBootstrap.Navbar.Collapse,
+                                        null,
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Nav,
+                                                { pullRight: true },
                                                 !isAuthenticated && _react2.default.createElement(
-                                                        _reactBootstrap.Button,
-                                                        {
-                                                                id: 'qsLoginBtn',
-                                                                style: { marginLeft: '7px', marginTop: '5px' },
-                                                                bsStyle: 'primary',
-                                                                onClick: this.login.bind(this) },
-                                                        'Log In'
+                                                        _reactBootstrap.NavItem,
+                                                        null,
+                                                        '   ',
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Button,
+                                                                {
+                                                                        id: 'qsLoginBtn',
+                                                                        style: { marginLeft: '7px', marginTop: '5px' },
+                                                                        bsStyle: 'primary',
+                                                                        onClick: this.login.bind(this) },
+                                                                'Log In'
+                                                        )
                                                 ),
                                                 isAuthenticated && _react2.default.createElement(
-                                                        _reactBootstrap.Button,
-                                                        {
-                                                                id: 'qsLogoutBtn',
-                                                                style: { marginLeft: '7px', marginTop: '5px' },
-                                                                bsStyle: 'primary',
-                                                                onClick: this.logout.bind(this) },
-                                                        'Log Out'
+                                                        'div',
+                                                        null,
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Nav,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                        _reactBootstrap.NavItem,
+                                                                        null,
+                                                                        _react2.default.createElement(
+                                                                                _reactBootstrap.Navbar.Text,
+                                                                                { pullRight: true },
+                                                                                _react2.default.createElement(
+                                                                                        _reactRouterDom.Link,
+                                                                                        { to: '/home' },
+                                                                                        'Home'
+                                                                                )
+                                                                        )
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                        _reactBootstrap.NavItem,
+                                                                        null,
+                                                                        _react2.default.createElement(
+                                                                                _reactBootstrap.Navbar.Text,
+                                                                                { pullRight: true },
+                                                                                _react2.default.createElement(
+                                                                                        _reactRouterDom.Link,
+                                                                                        { to: '/wallet' },
+                                                                                        'Wallet'
+                                                                                )
+                                                                        )
+                                                                )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Nav,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                        _reactBootstrap.NavItem,
+                                                                        null,
+                                                                        _react2.default.createElement(
+                                                                                _reactBootstrap.Button,
+                                                                                {
+                                                                                        id: 'qsLogoutBtn',
+                                                                                        style: { marginLeft: '7px', marginTop: '5px' },
+                                                                                        bsStyle: 'primary',
+                                                                                        onClick: this.logout.bind(this) },
+                                                                                'Log Out'
+                                                                        )
+                                                                )
+                                                        )
                                                 )
                                         )
                                 )
@@ -58788,6 +58830,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -58798,6 +58842,10 @@ var _Pseudo = __webpack_require__(/*! ./Pseudo.jsx */ "./src/client/app/Containe
 
 var _Pseudo2 = _interopRequireDefault(_Pseudo);
 
+var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
+
+var _components = __webpack_require__(/*! ../components.jsx */ "./src/client/app/components.jsx");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58806,11 +58854,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MapStateToProps = function MapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state) {
         return {
                 isAuthenticated: state.session.isAuthenticated,
-                isFetching: state.user.isFetching,
-                pseudo: state.user.pseudo };
+                id_token: state.session.id_token,
+                isFetching: state.session.isFetching,
+                pseudo: state.session.pseudo,
+                isGetting: state.user.isGetting,
+                iSetting: state.user.isSetting,
+                firstName: state.user.firstName,
+                lastName: state.user.lastName,
+                email: state.user.email,
+                phone: state.user.phone,
+                picture: state.user.picture,
+                bio: state.user.bio
+        };
+};
+
+var mapDispatchToProps = {
+        deletePseudo: _actions.deletePseudo,
+        setUserDetails: _actions.setUserDetail,
+        getUserDetail: _actions.getUserDetail
 };
 
 var HomeNC = function (_Component) {
@@ -58822,6 +58886,7 @@ var HomeNC = function (_Component) {
                 var _this = _possibleConstructorReturn(this, (HomeNC.__proto__ || Object.getPrototypeOf(HomeNC)).call(this, props));
 
                 _this.login = _this.login.bind(_this);
+                _this.handleDelete = _this.handleDelete.bind(_this);
                 return _this;
         }
 
@@ -58831,21 +58896,65 @@ var HomeNC = function (_Component) {
                         this.props.webAuth.authorize();
                 }
         }, {
+                key: 'handleDelete',
+                value: function handleDelete(e) {
+                        e.preventDefault();
+                        this.props.deletePseudo(this.props.id_token, this.props.pseudo);
+                        return false;
+                }
+        }, {
                 key: 'render',
                 value: function render() {
-                        var isAuthenticated = this.props.isAuthenticated;
-                        var isFetching = this.props.isFetching;
-                        var pseudo = this.props.pseudo;
+                        var _props = this.props,
+                            isAuthenticated = _props.isAuthenticated,
+                            isFetching = _props.isFetching,
+                            isGetting = _props.isGetting,
+                            isSetting = _props.isSetting,
+                            pseudo = _props.pseudo,
+                            id_token = _props.id_token,
+                            firstName = _props.firstName,
+                            lastName = _props.lastName,
+                            email = _props.email,
+                            phone = _props.phone,
+                            picture = _props.picture,
+                            bio = _props.bio;
+
+
                         var emptyPseudo = !Boolean(pseudo.length);
+                        if (!isFetching && isAuthenticated && !emptyPseudo) {
+                                this.props.getUserDetail(pseudo, id_token);
+                        }
                         return _react2.default.createElement(
                                 'div',
                                 { className: 'container' },
-                                !isFetching && isAuthenticated && !emptyPseudo && _react2.default.createElement(
+                                isFetching && _react2.default.createElement(
                                         'h4',
                                         null,
-                                        'Hi ',
-                                        pseudo,
-                                        '!'
+                                        'Retrieving your personal profile info (if you have created one).'
+                                ),
+                                !isFetching && isAuthenticated && !emptyPseudo && _react2.default.createElement(
+                                        'div',
+                                        null,
+                                        _react2.default.createElement(
+                                                'h4',
+                                                null,
+                                                'Public profile'
+                                        ),
+                                        _react2.default.createElement(_components.SetProfilePicture, { pseudo: pseudo }),
+                                        _react2.default.createElement(_components.SetProfileBio, { bio: bio }),
+                                        _react2.default.createElement(_components.SetProfileDetails, {
+                                                firstName: firstName,
+                                                lastName: lastName,
+                                                email: email,
+                                                phone: phone,
+                                                picture: picture
+                                        }),
+                                        _react2.default.createElement(
+                                                'h4',
+                                                null,
+                                                'Download and delete my Data'
+                                        ),
+                                        _react2.default.createElement(_components.AlertDismissable, { handleDelete: this.handleDelete })
                                 ),
                                 !isFetching && isAuthenticated && emptyPseudo && _react2.default.createElement(_Pseudo2.default, null),
                                 !isFetching && !isAuthenticated && _react2.default.createElement(
@@ -58871,28 +58980,136 @@ var HomeNC = function (_Component) {
         return HomeNC;
 }(_react.Component);
 
-var Home = (0, _reactRedux.connect)(MapStateToProps)(HomeNC);
+var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(HomeNC);
 exports.default = Home;
 
+/***/ }),
 
-{/*                                {isAuthenticated && isRegistered && typeof pseudo !== 'undefined' && 
-                                       <h4>Hi {pseudo}!</h4>
-                                       }
-                                       { isAuthenticated && !isRegistered && 
-                                       <Pseudo />
-                                       }
-                                       { !isAuthenticated && 
-                                      <h4>
-                                               You are not logged in! Please{' '}
-                                               <a
-                                                       style={{ cursor: 'pointer' }}
-                                                       onClick={this.login.bind(this)}
-                                               >
-                                                       Log In
-                                               </a>
-                                               {' '}to continue.
-                                       </h4>
-                                       } */}
+/***/ "./src/client/app/Containers/Login.jsx":
+/*!*********************************************!*\
+  !*** ./src/client/app/Containers/Login.jsx ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MapStateToProps = function MapStateToProps(state) {
+        return { isAuthenticated: state.session.isAuthenticated };
+};
+
+var MapDispatchToProps = { logout: _actions.logout };
+
+var LoginNC = function (_Component) {
+        _inherits(LoginNC, _Component);
+
+        function LoginNC() {
+                _classCallCheck(this, LoginNC);
+
+                var _this = _possibleConstructorReturn(this, (LoginNC.__proto__ || Object.getPrototypeOf(LoginNC)).call(this));
+
+                _this.login = _this.login.bind(_this);
+                _this.logout = _this.logout.bind(_this);
+                return _this;
+        }
+
+        _createClass(LoginNC, [{
+                key: 'goTo',
+                value: function goTo(route) {
+                        this.props.history.replace('/' + route);
+                }
+        }, {
+                key: 'login',
+                value: function login() {
+                        this.props.webAuth.authorize();
+                }
+        }, {
+                key: 'logout',
+                value: function logout() {
+                        this.props.logout();
+                }
+        }, {
+                key: 'render',
+                value: function render() {
+                        var linlkStyle = { color: 'black' };
+                        var isAuthenticated = this.props.isAuthenticated;
+                        return _react2.default.createElement(
+                                _reactBootstrap.Row,
+                                null,
+                                _react2.default.createElement(_reactBootstrap.Col, { xs: 0.5, sm: 1, md: 1.5, lg: 2 }),
+                                _react2.default.createElement(
+                                        _reactBootstrap.Col,
+                                        { xs: 11, sm: 10, md: 9, lg: 8 },
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Jumbotron,
+                                                null,
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.Row,
+                                                        null,
+                                                        _react2.default.createElement(_reactBootstrap.Col, { xs: 0.5, sm: 1, md: 1.5, lg: 2 }),
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Col,
+                                                                { xs: 11, sm: 10, md: 9, lg: 8 },
+                                                                _react2.default.createElement(
+                                                                        'h1',
+                                                                        null,
+                                                                        'My health, my heritage'
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                        'p',
+                                                                        null,
+                                                                        'Upload, manage and use your health data to live better and longer.'
+                                                                ),
+                                                                _react2.default.createElement(
+                                                                        _reactRouterDom.Link,
+                                                                        { to: '/splash/learnmore' },
+                                                                        'Learn more '
+                                                                )
+                                                        ),
+                                                        _react2.default.createElement(_reactBootstrap.Col, { xs: 0.5, sm: 1, md: 1.5, lg: 2 })
+                                                )
+                                        )
+                                ),
+                                _react2.default.createElement(_reactBootstrap.Col, { xs: 0.5, sm: 1, md: 1.5, lg: 2 })
+                        );
+                }
+        }]);
+
+        return LoginNC;
+}(_react.Component);
+
+;
+
+var Login = (0, _reactRedux.connect)(MapStateToProps, MapDispatchToProps)(LoginNC);
+
+exports.default = Login;
 
 /***/ }),
 
@@ -58918,6 +59135,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
+
+var _components = __webpack_require__(/*! ../components.jsx */ "./src/client/app/components.jsx");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58926,42 +59149,106 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Pseudo = function (_Component) {
-        _inherits(Pseudo, _Component);
+var mapStateToProps = function mapStateToProps(state) {
+        return { wasDeleted: state.session.wasDeleted, id_token: state.session.id_token, isAvailable: state.session.isAvailable, isSetting: state.session.isSetting, pseudo: state.session.pseudo };
+};
+var mapDispatchToProps = { setPseudo: _actions.setPseudo };
 
-        function Pseudo() {
-                _classCallCheck(this, Pseudo);
+var PseudoNC = function (_React$Component) {
+        _inherits(PseudoNC, _React$Component);
 
-                return _possibleConstructorReturn(this, (Pseudo.__proto__ || Object.getPrototypeOf(Pseudo)).apply(this, arguments));
+        function PseudoNC(props, context) {
+                _classCallCheck(this, PseudoNC);
+
+                var _this = _possibleConstructorReturn(this, (PseudoNC.__proto__ || Object.getPrototypeOf(PseudoNC)).call(this, props, context));
+
+                _this.handleChange = _this.handleChange.bind(_this);
+                _this.handleSubmit = _this.handleSubmit.bind(_this);
+                _this.state = {
+                        value: ''
+                };
+                return _this;
         }
 
-        _createClass(Pseudo, [{
+        _createClass(PseudoNC, [{
+                key: 'handleSubmit',
+                value: function handleSubmit(e) {
+                        e.preventDefault();
+                        this.props.setPseudo(this.props.id_token, this.state.value);
+                        return false;
+                }
+        }, {
+                key: 'handleChange',
+                value: function handleChange(e) {
+                        this.setState({ value: e.target.value });
+                }
+        }, {
                 key: 'render',
                 value: function render() {
                         return _react2.default.createElement(
-                                _reactBootstrap.Row,
+                                'div',
                                 null,
                                 _react2.default.createElement(
-                                        _reactBootstrap.Col,
-                                        { xs: 6, sm: 5, md: 4, lg: 2 },
+                                        'form',
+                                        { onSubmit: this.handleSubmit },
                                         _react2.default.createElement(
-                                                'h4',
-                                                null,
-                                                'Choose your Pseudo'
+                                                _reactBootstrap.FormGroup,
+                                                {
+                                                        controlId: 'formBasicText'
+                                                },
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.ControlLabel,
+                                                        null,
+                                                        'If you wish to start adding personal information, choose your nickname'
+                                                ),
+                                                _react2.default.createElement(_reactBootstrap.FormControl, {
+                                                        type: 'text',
+                                                        value: this.state.value,
+                                                        placeholder: 'HealthyPrimate',
+                                                        onChange: this.handleChange
+                                                }),
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.HelpBlock,
+                                                        null,
+                                                        'For better anonymity, you may not reveal your real name.'
+                                                )
                                         ),
                                         _react2.default.createElement(
                                                 _reactBootstrap.Button,
                                                 { type: 'submit' },
-                                                ' Choose'
+                                                'Get ',
+                                                this.state.value
                                         )
+                                ),
+                                this.props.isSetting === true && _react2.default.createElement(
+                                        _reactBootstrap.Alert,
+                                        null,
+                                        ' Checking for availability: ',
+                                        this.state.value,
+                                        ' '
+                                ),
+                                this.props.isAvailable === true && this.props.wasDeleted === false && _react2.default.createElement(
+                                        _reactBootstrap.Alert,
+                                        null,
+                                        ' It is available and set: ',
+                                        this.state.value,
+                                        ' '
+                                ),
+                                this.props.isAvailable === false && this.props.isSetting === false && _react2.default.createElement(
+                                        _reactBootstrap.Alert,
+                                        null,
+                                        ' Sorry but ',
+                                        this.state.value,
+                                        ' is not available. Please try another one.'
                                 )
                         );
                 }
         }]);
 
-        return Pseudo;
-}(_react.Component);
+        return PseudoNC;
+}(_react2.default.Component);
 
+var Pseudo = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PseudoNC);
 exports.default = Pseudo;
 
 /***/ }),
@@ -59001,7 +59288,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var MapStateToProps = function MapStateToProps(state) {
-        return { isAuthenticated: isAuthenticated };
+        return { isAuthenticated: state.session.isAuthenticated };
 };
 
 var WalletNC = function (_Component) {
@@ -59051,7 +59338,6 @@ var WalletNC = function (_Component) {
                 key: 'render',
                 value: function render() {
                         var isAuthenticated = this.props.isAuthenticated;
-                        var emptyPseudo = Boolean(pseudo.length());
                         return _react2.default.createElement(
                                 'div',
                                 { className: 'container' },
@@ -59107,8 +59393,12 @@ exports.default = Wallet;
 Object.defineProperty(exports, "__esModule", {
         value: true
 });
-exports.logout = exports.setSession = undefined;
+exports.logout = exports.setSessionFromLocalStorage = exports.setSession = undefined;
+exports.setPseudo = setPseudo;
 exports.fetchPseudo = fetchPseudo;
+exports.deletePseudo = deletePseudo;
+exports.setUserDetail = setUserDetail;
+exports.getUserDetail = getUserDetail;
 
 var _reactRouter = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
 
@@ -59118,6 +59408,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 // Session
 var setSession = exports.setSession = function setSession(authResult) {
         authResult.expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
@@ -59125,6 +59417,18 @@ var setSession = exports.setSession = function setSession(authResult) {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', authResult.expiresAt);
+        return {
+                type: 'SET_SESSION',
+                authResult: authResult
+        };
+};
+
+// Session persistence upon reload
+var setSessionFromLocalStorage = exports.setSessionFromLocalStorage = function setSessionFromLocalStorage() {
+        var authResult = new Object();
+        authResult.expiresAt = localStorage.getItem('expires_at');
+        authResult.accessToken = localStorage.getItem('access_token');
+        authResult.idToken = localStorage.getItem('id_token');
         return {
                 type: 'SET_SESSION',
                 authResult: authResult
@@ -59141,6 +59445,54 @@ var logout = exports.logout = function logout() {
 };
 
 // User
+// Un-registered: set pseudo
+
+var requestSetPseudo = function requestSetPseudo(pseudo) {
+        return { type: 'REQUEST_SET_PSEUDO' };
+};
+
+var receiveSetPseudo = function receiveSetPseudo(pseudo, isAvailable) {
+        return { type: 'RECEIVE_SET_PSEUDO',
+                pseudo: pseudo,
+                isAvailable: isAvailable };
+};
+
+function setPseudo(id_token, pseudo) {
+        return function (dispatch) {
+                dispatch(requestSetPseudo(pseudo));
+                return (0, _axios2.default)({
+                        baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+                        url: 'createUser',
+                        method: 'post',
+                        params: {
+                                pseudo: pseudo
+                        },
+                        headers: {
+                                Authorization: 'Bearer ' + id_token
+                        }
+                }).then(function (res) {
+                        var isAvailable = void 0;
+                        if (res.status === 201) {
+                                isAvailable = true;
+                        }
+                        if (res.status === 200) {
+                                isAvailable = false;
+                        }
+
+                        return isAvailable;
+                }, function (error) {
+                        return console.log('An error occurred.', error);
+                }).then(function (isAvailable) {
+                        if (isAvailable) {
+                                dispatch(receiveSetPseudo(pseudo, isAvailable));
+                        } else {
+                                dispatch(receiveSetPseudo('', isAvailable));
+                        }
+                });
+        };
+}
+
+// Registered: request pseudo
 var requestPseudo = function requestPseudo() {
         return { type: 'REQUEST_PSEUDO' };
 };
@@ -59175,22 +59527,129 @@ function fetchPseudo(id_token) {
         };
 }
 
-//export const setUser = props => {
-//        axios({
-//                baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
-//                url: 'updateUser.js',
-//                params: {
-//                        category: props.category,
-//                        key: props.key,
-//                        text: props.text,
-//                        json: props.json
-//                },
-//                method: 'post',
-//                headers: {
-//                        Authorization: 'Bearer ' +  localStorage.id_token
-//                }
-//        })
-//}
+// Delete user
+
+var requestDeletePseudo = function requestDeletePseudo() {
+        return { type: 'REQUEST_DELETE_PSEUDO' };
+};
+
+var receiveDeletePseudo = function receiveDeletePseudo() {
+        return { type: 'RECEIVE_DELETE_PSEUDO'
+        };
+};
+
+function deletePseudo(id_token, pseudo) {
+        return function (dispatch) {
+                dispatch(requestDeletePseudo());
+                return (0, _axios2.default)({
+                        baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+                        url: 'deleteUser',
+                        method: 'post',
+                        params: {
+                                pseudo: pseudo
+                        },
+                        headers: {
+                                Authorization: 'Bearer ' + id_token
+                        }
+                }).then(function (res) {
+                        var ok = void 0;
+                        if (res.status === 201) {
+                                ok = true;
+                        }
+
+                        return ok;
+                }, function (error) {
+                        return console.log('An error occurred.', error);
+                }).then(function (ok) {
+                        if (ok) {
+                                dispatch(receiveDeletePseudo());
+                        }
+                });
+        };
+}
+
+// Set user detail
+
+var requestSetUserDetail = function requestSetUserDetail(category, subcategory, key, text, json) {
+        return _defineProperty({ type: 'REQUEST_SET_USER'
+        }, key.subkey, val.subval);
+};
+
+var receiveSetUserDetail = function receiveSetUserDetail(success) {
+        if (success) {
+                return { type: 'RECEIVE_SET_PSEUDO' };
+        }
+};
+
+function setUserDetail(obj, id_token) {
+
+        return function (dispatch) {
+                dispatch(requestSetUserDetail());
+
+                return (0, _axios2.default)({
+                        baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+                        url: 'updateUserJSON',
+                        method: 'post',
+                        params: {
+                                json: JSON.stringify(obj)
+                        },
+                        headers: {
+                                Authorization: 'Bearer ' + id_token
+                        }
+                }).then(function (res) {
+                        var ok = void 0;
+                        if (res.status === 201) {
+                                ok = true;
+                        }
+
+                        return ok;
+                }, function (error) {
+                        return console.log('An error occurred.', error);
+                }).then(function (ok) {
+                        if (ok) {
+                                dispatch(receiveSetUserDetail());
+                        }
+                });
+        };
+}
+
+// Get user detail
+
+var requestGetUserDetail = function requestGetUserDetail() {
+        return { type: 'REQUEST_GET_USER' };
+};
+
+var receiveGetUserDetail = function receiveGetUserDetail(data) {
+        return { type: 'RECEIVE_GET_USER',
+                data: data };
+};
+
+function getUserDetail(pseudo, id_token) {
+
+        return function (dispatch) {
+                dispatch(requestGetUserDetail());
+
+                return (0, _axios2.default)({
+                        baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
+                        url: 'getUser',
+                        method: 'get',
+                        params: {
+                                pseudo: pseudo
+                        },
+                        headers: {
+                                Authorization: 'Bearer ' + id_token
+                        }
+                }).then(function (res) {
+                        if (res.status === 200) {
+                                return res.data;
+                        }
+                }, function (error) {
+                        return console.log('An error occurred.', error);
+                }).then(function (data) {
+                        dispatch(receiveGetUserDetail(data));
+                });
+        };
+}
 
 /***/ }),
 
@@ -59212,6 +59671,454 @@ var AUTH_CONFIG = exports.AUTH_CONFIG = {
           clientId: 'DKYRjMDoaLlPwmdDcGWGshIHFuwXwtMZ',
           callbackUrl: 'https://reactapp.cloud/callback'
 };
+
+/***/ }),
+
+/***/ "./src/client/app/components.jsx":
+/*!***************************************!*\
+  !*** ./src/client/app/components.jsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+exports.SetProfileDetails = exports.SetProfileBio = exports.SetProfilePicture = exports.AlertDismissable = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function FieldGroup(_ref) {
+        var id = _ref.id,
+            label = _ref.label,
+            help = _ref.help,
+            props = _objectWithoutProperties(_ref, ['id', 'label', 'help']);
+
+        return _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                { controlId: id },
+                _react2.default.createElement(
+                        _reactBootstrap.ControlLabel,
+                        null,
+                        label
+                ),
+                _react2.default.createElement(_reactBootstrap.FormControl, props),
+                help && _react2.default.createElement(
+                        _reactBootstrap.HelpBlock,
+                        null,
+                        help
+                )
+        );
+}
+// Presentation component template
+//const FieldGroup = (id, label, help, ...props) => {
+//        return (<FormGroup controlId={id}>
+//                <ControlLabel>{label}</ControlLabel>
+//                <FormControl {...props} />
+//                {help && <HelpBlock>{help}</HelpBlock>}
+//        </FormGroup>)
+//}
+
+var AlertDismissable = exports.AlertDismissable = function (_React$Component) {
+        _inherits(AlertDismissable, _React$Component);
+
+        function AlertDismissable(props, context) {
+                _classCallCheck(this, AlertDismissable);
+
+                var _this = _possibleConstructorReturn(this, (AlertDismissable.__proto__ || Object.getPrototypeOf(AlertDismissable)).call(this, props, context));
+
+                _this.handleDismiss = _this.handleDismiss.bind(_this);
+                _this.handleShow = _this.handleShow.bind(_this);
+                _this.handleDelete = _this.props.handleDelete.bind(_this);
+
+                _this.state = {
+                        show: false
+                };
+                return _this;
+        }
+
+        _createClass(AlertDismissable, [{
+                key: 'handleDismiss',
+                value: function handleDismiss() {
+                        this.setState({ show: false });
+                }
+        }, {
+                key: 'handleShow',
+                value: function handleShow() {
+                        this.setState({ show: true });
+                }
+        }, {
+                key: 'render',
+                value: function render() {
+                        if (this.state.show) {
+                                return _react2.default.createElement(
+                                        _reactBootstrap.Alert,
+                                        { bsStyle: 'danger', onDismiss: this.handleDismiss },
+                                        _react2.default.createElement(
+                                                'h4',
+                                                null,
+                                                'This action deletes all your data'
+                                        ),
+                                        _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                'You cannot undo this step'
+                                        ),
+                                        _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.Button,
+                                                        { bsStyle: 'danger', onClick: this.handleDelete },
+                                                        ' Delete my data'
+                                                ),
+                                                _react2.default.createElement(
+                                                        'span',
+                                                        null,
+                                                        ' or '
+                                                ),
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.Button,
+                                                        { onClick: this.handleDismiss },
+                                                        'Keep my data'
+                                                )
+                                        )
+                                );
+                        }
+
+                        return _react2.default.createElement(
+                                _reactBootstrap.Button,
+                                { onClick: this.handleShow },
+                                'Delete my Info'
+                        );
+                }
+        }]);
+
+        return AlertDismissable;
+}(_react2.default.Component);
+
+var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2) {
+        _inherits(SetProfilePicture, _React$Component2);
+
+        function SetProfilePicture(props) {
+                _classCallCheck(this, SetProfilePicture);
+
+                var _this2 = _possibleConstructorReturn(this, (SetProfilePicture.__proto__ || Object.getPrototypeOf(SetProfilePicture)).call(this, props));
+
+                _this2.state = {
+                        picture: false,
+                        helpMessage: "Choose picture",
+                        files: undefined
+                };
+                _this2.handleChange = _this2.handleChange.bind(_this2);
+                _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
+                return _this2;
+        }
+
+        _createClass(SetProfilePicture, [{
+                key: 'handleChange',
+                value: function handleChange(event) {
+                        this.setState({
+                                files: event.target.files,
+                                helpMessage: "Uploading " + event.target.files[0].name
+                        });
+                }
+        }, {
+                key: 'handleSubmit',
+                value: function handleSubmit(event) {
+                        var data = new FormData();
+                        data.append('file', this.state.files[0]);
+                        var config = {
+                                onUploadProgress: function onUploadProgress(progressEvent) {
+                                        var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+                                },
+                                params: {
+                                        pseudo: this.props.pseudo,
+                                        key: "profilePicture"
+                                },
+                                headers: {
+                                        Authorization: "Bearer " + localStorage.id_token
+                                }
+                        };
+
+                        axios.put('https://wt-davidweiss-dnavid_com-0.run.webtask.io/transferFiles.js', data, config).then(function (res) {
+                                this.setState({ "helpMessage": "File uploaded" });
+                        }).catch(function (err) {
+                                this.setState({ "helpMessage": "oh, snap!" });
+                        });
+                }
+        }, {
+                key: 'render',
+                value: function render() {
+                        var pseudo = this.props.pseudo;
+                        return _react2.default.createElement(
+                                'div',
+                                null,
+                                _react2.default.createElement(
+                                        _reactBootstrap.Row,
+                                        null,
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Col,
+                                                { xs: 3, sm: 2, md: 2, lg: 2 },
+                                                _react2.default.createElement(_reactBootstrap.Image, { src: this.state.picture || "https://storage.googleapis.com/dnavid/egg.png", thumbnail: true })
+                                        ),
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Col,
+                                                { xs: 9, sm: 10, md: 10, lg: 10 },
+                                                _react2.default.createElement(
+                                                        'h1',
+                                                        null,
+                                                        pseudo
+                                                )
+                                        )
+                                ),
+                                _react2.default.createElement(
+                                        _reactBootstrap.Row,
+                                        null,
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Col,
+                                                { xs: 12, sm: 12, md: 12, lg: 12 },
+                                                _react2.default.createElement(
+                                                        'form',
+                                                        { onSubmit: this.handleSubmit },
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.FormGroup,
+                                                                { controlId: 'formControlFile' },
+                                                                _react2.default.createElement(
+                                                                        _reactBootstrap.ControlLabel,
+                                                                        null,
+                                                                        'Upload your picture'
+                                                                ),
+                                                                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'file', onChange: this.state.handleChange }),
+                                                                this.state.helpMessage && _react2.default.createElement(
+                                                                        _reactBootstrap.HelpBlock,
+                                                                        null,
+                                                                        this.state.helpMessage
+                                                                )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Button,
+                                                                { type: 'submit' },
+                                                                ' Change Picture '
+                                                        )
+                                                )
+                                        )
+                                )
+                        );
+                }
+        }]);
+
+        return SetProfilePicture;
+}(_react2.default.Component);
+
+var SetProfileBio = exports.SetProfileBio = function (_React$Component3) {
+        _inherits(SetProfileBio, _React$Component3);
+
+        function SetProfileBio(props) {
+                _classCallCheck(this, SetProfileBio);
+
+                var _this3 = _possibleConstructorReturn(this, (SetProfileBio.__proto__ || Object.getPrototypeOf(SetProfileBio)).call(this, props));
+
+                if (typeof _this3.props.bio === 'undefined') {
+                        console.log("bio is undefined");
+                        _this3.state = {
+                                "bio": ""
+                        };
+                } else {
+                        _this3.state = {
+                                "bio": _this3.props.bio
+                        };
+                }
+                _this3.handleChange = _this3.handleChange.bind(_this3);
+                _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
+
+                return _this3;
+        }
+
+        _createClass(SetProfileBio, [{
+                key: 'handleChange',
+                value: function handleChange(event) {
+                        this.setState(_defineProperty({}, event.target.name, event.target.value));
+                }
+        }, {
+                key: 'handleSubmit',
+                value: function handleSubmit(event) {
+                        setUser({
+                                category: "profile",
+                                key: "bio",
+                                text: this.state.bio
+                        });
+                }
+        }, {
+                key: 'render',
+                value: function render() {
+                        return _react2.default.createElement(
+                                _reactBootstrap.Row,
+                                null,
+                                _react2.default.createElement(
+                                        _reactBootstrap.Col,
+                                        { xs: 8, sm: 8, md: 5, lg: 4 },
+                                        _react2.default.createElement(
+                                                'form',
+                                                { onSubmit: this.handleSubmit },
+                                                _react2.default.createElement(FieldGroup, {
+                                                        style: { minHeight: 145 },
+                                                        id: 'formControlsTextarea',
+                                                        componentClass: 'textarea',
+                                                        name: 'bio',
+                                                        type: 'textarea',
+                                                        label: 'Bio',
+                                                        placeholder: 'Why I\'m interested in DNA. Is there something that runs in my family that could be due to DNA. Max. 120 characters.',
+                                                        value: this.state.bio,
+                                                        onChange: this.handleChange
+                                                })
+                                        )
+                                )
+                        );
+                }
+        }]);
+
+        return SetProfileBio;
+}(_react2.default.Component);
+
+var SetProfileDetails = exports.SetProfileDetails = function (_React$Component4) {
+        _inherits(SetProfileDetails, _React$Component4);
+
+        function SetProfileDetails(props) {
+                _classCallCheck(this, SetProfileDetails);
+
+                var _this4 = _possibleConstructorReturn(this, (SetProfileDetails.__proto__ || Object.getPrototypeOf(SetProfileDetails)).call(this, props));
+
+                if (typeof _this4.props.private === 'undefined') {
+                        _this4.state = {
+                                "firstName": "",
+                                "lastName": "",
+                                "email": "",
+                                "phone": ""
+                        };
+                } else {
+                        _this4.state = {
+                                "firstName": _this4.props.firstName,
+                                "lastName": _this4.props.lastName,
+                                "email": _this4.props.email,
+                                "phone": _this4.props.phone
+                        };
+                }
+                _this4.handleChange = _this4.handleChange.bind(_this4);
+                _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
+
+                return _this4;
+        }
+
+        _createClass(SetProfileDetails, [{
+                key: 'handleChange',
+                value: function handleChange(event) {
+                        this.setState(_defineProperty({}, event.target.name, event.target.value));
+                }
+        }, {
+                key: 'handleSubmit',
+                value: function handleSubmit(event) {
+                        var text = {
+                                firstName: this.state.firstName,
+                                lastName: this.state.lastName,
+                                email: this.state.email,
+                                phone: this.state.phone
+                        };
+
+                        setUser({
+                                category: "profile",
+                                key: "private",
+                                text: text,
+                                json: true
+                        });
+                }
+        }, {
+                key: 'render',
+                value: function render() {
+                        return _react2.default.createElement(
+                                _reactBootstrap.Row,
+                                null,
+                                _react2.default.createElement(
+                                        _reactBootstrap.Col,
+                                        { xs: 6, sm: 6, md: 3, lg: 3 },
+                                        _react2.default.createElement(
+                                                'h4',
+                                                null,
+                                                'Personal Details'
+                                        ),
+                                        _react2.default.createElement(
+                                                'form',
+                                                { onSubmit: this.handleSubmit },
+                                                _react2.default.createElement(FieldGroup, {
+                                                        id: 'formControlsText',
+                                                        name: 'firstName',
+                                                        type: 'text',
+                                                        label: 'First Name',
+                                                        placeholder: 'First name',
+                                                        value: this.state.firstName,
+                                                        onChange: this.handleChange
+                                                }),
+                                                _react2.default.createElement(FieldGroup, {
+                                                        id: 'formControlsText',
+                                                        name: 'lastName',
+                                                        type: 'text',
+                                                        label: 'Last Name',
+                                                        placeholder: 'Last name',
+                                                        value: this.state.lastName,
+                                                        onChange: this.handleChange
+                                                }),
+                                                _react2.default.createElement(FieldGroup, {
+                                                        id: 'formControlsText',
+                                                        type: 'text',
+                                                        name: 'phone',
+                                                        label: 'Phone',
+                                                        placeholder: 'Phone',
+                                                        value: this.state.phone,
+                                                        onChange: this.handleChange
+                                                }),
+                                                _react2.default.createElement(FieldGroup, {
+                                                        id: 'formControlsText',
+                                                        name: 'email',
+                                                        type: 'email',
+                                                        label: 'email',
+                                                        placeholder: 'Email',
+                                                        value: this.state.email,
+                                                        onChange: this.handleChange
+                                                }),
+                                                _react2.default.createElement(
+                                                        _reactBootstrap.Button,
+                                                        { type: 'submit' },
+                                                        ' Update details'
+                                                )
+                                        )
+                                )
+                        );
+                }
+        }]);
+
+        return SetProfileDetails;
+}(_react2.default.Component);
 
 /***/ }),
 
@@ -59250,8 +60157,8 @@ exports.default = (0, _createBrowserHistory2.default)();
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-//import loading from './loading.svg'
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _reduxThunk = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/lib/index.js");
 
@@ -59295,6 +60202,10 @@ var _Callback = __webpack_require__(/*! ./Containers/Callback.jsx */ "./src/clie
 
 var _Callback2 = _interopRequireDefault(_Callback);
 
+var _Login = __webpack_require__(/*! ./Containers/Login.jsx */ "./src/client/app/Containers/Login.jsx");
+
+var _Login2 = _interopRequireDefault(_Login);
+
 var _reducers = __webpack_require__(/*! ./reducers.jsx */ "./src/client/app/reducers.jsx");
 
 var _reducers2 = _interopRequireDefault(_reducers);
@@ -59303,6 +60214,15 @@ var _actions = __webpack_require__(/*! ./actions.jsx */ "./src/client/app/action
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+//import loading from './loading.svg'
+
+
+// From Auth0 
 var webAuth = new _auth0Js2.default.WebAuth({
         domain: _auth0_variables.AUTH_CONFIG.domain,
         clientID: _auth0_variables.AUTH_CONFIG.clientId,
@@ -59311,11 +60231,16 @@ var webAuth = new _auth0Js2.default.WebAuth({
         responseType: 'token id_token',
         scope: 'openid'
 });
-// From Auth0 React samples
 
 // Create store
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 var store = (0, _redux.createStore)(_reducers2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
+//
+// Local session?
+if (typeof localStorage.getItem('expires_at') !== 'undefined' && JSON.parse(localStorage.getItem('expires_at')) > new Date().getTime()) {
+        store.dispatch((0, _actions.setSessionFromLocalStorage)());
+        store.dispatch((0, _actions.fetchPseudo)(localStorage.getItem('id_token')));
+}
 
 // Handle authentication
 var handleAuthentication = function handleAuthentication(_ref) {
@@ -59336,6 +60261,38 @@ var handleAuthentication = function handleAuthentication(_ref) {
         }
 };
 
+var LearnMore = function (_React$Component) {
+        _inherits(LearnMore, _React$Component);
+
+        function LearnMore() {
+                _classCallCheck(this, LearnMore);
+
+                return _possibleConstructorReturn(this, (LearnMore.__proto__ || Object.getPrototypeOf(LearnMore)).apply(this, arguments));
+        }
+
+        _createClass(LearnMore, [{
+                key: 'render',
+                value: function render() {
+                        return _react2.default.createElement(
+                                'div',
+                                null,
+                                _react2.default.createElement(
+                                        'h1',
+                                        null,
+                                        'Info'
+                                ),
+                                _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/' },
+                                        'Back'
+                                )
+                        );
+                }
+        }]);
+
+        return LearnMore;
+}(_react2.default.Component);
+
 (0, _reactDom.render)(_react2.default.createElement(
         _reactRedux.Provider,
         { store: store },
@@ -59348,8 +60305,17 @@ var handleAuthentication = function handleAuthentication(_ref) {
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
                                         return _react2.default.createElement(_App2.default, _extends({ webAuth: webAuth }, props));
                                 } }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, render: function render(props) {
+                                        return _react2.default.createElement(_Login2.default, _extends({ webAuth: webAuth }, props));
+                                } }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/splash', render: function render(props) {
+                                        return _react2.default.createElement(_Login2.default, _extends({ webAuth: webAuth }, props));
+                                } }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/splash/learnmore', exact: true, render: function render(props) {
+                                        return _react2.default.createElement(LearnMore, _extends({ webAuth: webAuth }, props));
+                                } }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
-                                        return _react2.default.createElement(_Home2.default, _extends({ webAuth: webAuth, store: store }, props));
+                                        return _react2.default.createElement(_Home2.default, _extends({ webAuth: webAuth }, props));
                                 } }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/wallet', render: function render(props) {
                                         return _react2.default.createElement(_Wallet2.default, _extends({ webAuth: webAuth }, props));
@@ -59387,7 +60353,10 @@ var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js"
 
 // Reducer
 function session() {
-        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { isAuthenticated: false };
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+                isAuthenticated: false,
+                isFetching: false,
+                pseudo: '' };
         var action = arguments[1];
 
         switch (action.type) {
@@ -59405,19 +60374,27 @@ function session() {
                                 expires_at: action.text,
                                 isAuthenticated: false
                         });
-                default:
-                        return state;
-        }
-}
-
-function user() {
-        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-                isFetching: false,
-                pseudo: ''
-        };
-        var action = arguments[1];
-
-        switch (action.type) {
+                case 'REQUEST_DELETE_PSEUDO':
+                        return _extends({}, state, {
+                                isDeleting: true
+                        });
+                case 'RECEIVE_DELETE_PSEUDO':
+                        return _extends({}, state, {
+                                isDeleting: false,
+                                wasDeleted: true,
+                                pseudo: ''
+                        });
+                case 'REQUEST_SET_PSEUDO':
+                        return _extends({}, state, {
+                                isSetting: true
+                        });
+                case 'RECEIVE_SET_PSEUDO':
+                        return _extends({}, state, {
+                                isSetting: false,
+                                isAvailable: action.isAvailable,
+                                wasDeleted: false,
+                                pseudo: action.pseudo
+                        });
                 case 'REQUEST_PSEUDO':
                         return _extends({}, state, {
                                 isFetching: true
@@ -59426,6 +60403,51 @@ function user() {
                         return _extends({}, state, {
                                 isFetching: false,
                                 pseudo: action.pseudo
+                        });
+                default:
+                        return state;
+        }
+}
+
+function user() {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+                picture: '',
+                bio: '',
+                firstName: '',
+                lastName: '',
+                phone: '',
+                email: ''
+        };
+        var action = arguments[1];
+
+        switch (action.type) {
+                case 'REQUEST_GET_USER':
+                        return _extends({}, state, {
+                                isGetting: true
+                        });
+                case 'RECEIVE_GET_USER':
+                        return _extends({}, state, {
+                                firstName: action.firstName,
+                                lastName: action.lastName,
+                                email: action.email,
+                                phone: action.phone,
+                                picture: action.picture,
+                                bio: action.bio,
+                                isGetting: false
+                        });
+                case 'REQUEST_SET_USER':
+                        return _extends({}, state, {
+                                firstName: action.firstName,
+                                lastName: action.lastName,
+                                email: action.email,
+                                phone: action.phone,
+                                picture: action.picture,
+                                bio: action.bio,
+                                isSetting: true
+                        });
+                case 'RECEIVE_SET_USER':
+                        return _extends({}, state, {
+                                isSetting: false
                         });
                 default:
                         return state;

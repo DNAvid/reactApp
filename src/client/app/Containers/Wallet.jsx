@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-const MapStateToProps = state => ({isAuthenticated: isAuthenticated})
+const MapStateToProps = state => ({isAuthenticated: state.session.isAuthenticated})
 
 class WalletNC extends Component {
 
@@ -46,7 +46,6 @@ class WalletNC extends Component {
 
         render() {
                 let isAuthenticated = this.props.isAuthenticated
-                const emptyPseudo =  Boolean(pseudo.length()) 
                 return (
                         <div className="container">
                                 {
