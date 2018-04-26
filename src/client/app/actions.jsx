@@ -4,9 +4,9 @@ import axios from 'axios';
 export const setSession = authResult => {
         authResult.expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime()); 
         // persist locally in case of reload
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', authResult.expiresAt);
+        localStorage.setItem('access_token', JSON.stringify(authResult.accessToken));
+        localStorage.setItem('id_token', JSON.stringify(authResult.idToken));
+        localStorage.setItem('expires_at', JSON.stringify(authResult.expiresAt));
         return ({
                 type:'SET_SESSION',
                 authResult
@@ -92,6 +92,7 @@ const receivePseudo = (pseudo) => {
         return {type: 'RECEIVE_PSEUDO', pseudo: pseudo}
 }
 
+
 export function fetchPseudo(id_token) {
         return function (dispatch) {
                  dispatch(requestPseudo(id_token))
@@ -165,48 +166,92 @@ export function deletePseudo(id_token, pseudo) {
 }
 
 // Set user detail
-
-const requestSetUserDetail = (category, subcategory, key, text, json) => { 
-        return {type: 'REQUEST_SET_USER',
-                [key.subkey]:val.subval,
+const requestSetUserDetail = () => { 
+        return {type: 'REQUEST_SET_USER'
         }
 }
 
-const receiveSetUserDetail = (success) => { 
-        if (success){
-        return {type: 'RECEIVE_SET_PSEUDO'}
+const receiveSetUserDetail = (success, payload) => {
+if (success){
+                return {type: 'RECEIVE_SET_USER',
+               payload }
         }
 }
 
-export function setUserDetail(obj, id_token) {
+const initVars = function(fromNew, fromState, fromInit)  {
 
-        return function (dispatch) {
-                dispatch(requestSetUserDetail())
+        var matches = [fromNew, fromInit, fromState]
+        //Not empty
+        .map(y => Object.keys(y).filter( x => y[x]!=="" && y[x]!= 'undefined'))
+        // flatten
+        .reduce((flat, toFlaten) => flat.concat(toFlaten),[])
+        //unique
+        .filter((v, i, a) => a.indexOf(v) === i); 
+
+
+        var out = {};
+        for (var i = 0; i <= matches.length-1; i++) {
+                  var idx=matches[i]
+                  
+                  if (Object.keys(fromInit).map(x => x === idx ).reduce((x,y)=> y?x+y:x,0)>0){
+                            
+                             out[idx]=fromNew[idx] || fromState[idx] || fromInit[idx] }
+        }
+        return(out)
+}
+
+export function setUserDetail(path, obj) {
+        return function (dispatch, getState) {
+                var fromInit = { 
+                        firstName: '',
+                        lastName:  '', 
+                        email:     '',    
+                        phone:     '',    
+                        picture:   '', 
+                        bio:       ''
+                }
+
+                var moduleStore = 'user'
+
+                var fromNew=obj
+                var fromState=getState()[path]
+
+                var hydratedData = initVars(
+                        fromNew   =  fromNew, 
+                        fromState =  fromState,
+                        fromInit  =  fromInit)
 
                 return axios({
                         baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
-                        url: 'updateUserJSON',
+                        url: 'updateUser',
                         method: 'post',
                         params: {
-                                json : JSON.stringify(obj) 
+                                DBPath: path,
+                                json: JSON.stringify(hydratedData)
                         },
                         headers: {
-                                Authorization: 'Bearer ' + id_token
+                                Authorization: 'Bearer ' + getState().session.id_token
+                                
                         }
                 })
                         .then(
                                 
-                                res => {let ok
-                                        if ( res.status === 201 ) { ok = true }
-                                                
-                                        return(ok)
+                                res => {
+                                debugger; 
+                                        if ( res.status === 201 ) { 
+                                                var ok= true
+                                        return(ok)}
                                 },
                                 error => console.log('An error occurred.', error)   
                         )
-                        .then(ok => {
-                                if (ok){
-                                        dispatch(receiveSetUserDetail())}                       
-                        }
+                        .then(
+                                ok => { 
+                                        if (ok) { 
+                                                 
+                                                debugger;                               
+                                                dispatch( receiveSetUserDetail(ok, obj)) 
+                                        }
+                                }
                         )
         }
 }
@@ -217,22 +262,23 @@ const requestGetUserDetail = () => {
         return {type: 'REQUEST_GET_USER'}
 }
 
-const receiveGetUserDetail = (data) => { 
+const receiveGetUserDetail = (payload) => { 
                 return {type: 'RECEIVE_GET_USER',
-                data}
+                payload}
 }
 
-export function getUserDetail(session) {
+export function getUserDetail() {
 
-        return function (dispatch) {
+        return function (dispatch, getState) {
                 dispatch(requestGetUserDetail())
-
+                var session = getState().session
                 return axios({
                         baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
                         url: 'getUser',
                         method: 'get',
                         params: {
-                                pseudo : session.pseudo
+                                pseudo : session.pseudo,
+                                cat: 'user'
                         },
                         headers: {
                                 Authorization: 'Bearer ' + session.id_token
@@ -248,7 +294,13 @@ export function getUserDetail(session) {
                                 error => console.log('An error occurred.', error)   
                         )
                         .then( data => {
-                                        dispatch(receiveGetUserDetail(data)) 
+                                if (typeof data !== 'undefined' && data != '') {dispatch(receiveGetUserDetail(data)) }
+                                else{
+                                        var dataInit = {
+
+                                        }
+                                        dispatch(receiveGetUserDetail(dataInit))
+                                }
                         }
                         )
         }

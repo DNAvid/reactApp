@@ -23,7 +23,6 @@ class Login extends Component {
         }
 
         render() {
-                const linlkStyle = {color: 'black', }
                 const isAuthenticated = this.props.isAuthenticated
                 return (
                         <Row>
@@ -40,9 +39,9 @@ class Login extends Component {
 
                                                         <Col xs={11} sm={10} md={9} lg={8}>
 
-                                                                <h1>My health, my heritage</h1>
+                                                                <h1>How much is my health worth?</h1>
                                                                 <p>
-                                                                        Upload, manage and use your health data to live better and longer.
+                                                                        DNA-ID associates your DNA to a bitcoin wallet that you own and use to participate in the new health economy.
                                                                 </p>
                                                                 <Link to='/splash/learnmore'>Learn more </Link>
                                                         </Col>

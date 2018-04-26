@@ -1,4 +1,9 @@
+src/client/public/bundle.js
+package-lock.json
 node_modules
 src/server/server.key
 *.swp
 *.swo
+*.swn
+*.js.map
+

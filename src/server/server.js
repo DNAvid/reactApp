@@ -1,15 +1,13 @@
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-
 var fs = require('fs');
 // key not synched on git
-var key = fs.readFileSync('src/server/server.key');
-var cert = fs.readFileSync('src/server/server.crt');
+var key = fs.readFileSync('/etc/letsencrypt/archive/dnavid.com/privkey1.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/archive/dnavid.com/fullchain1.pem');
 var https = require('https');
 var http = require('http');
 var express = require('express');
 var serveStatic = require('serve-static')
-var fs = require('fs')
 var https_options = {
 	key: key,
 	cert: cert

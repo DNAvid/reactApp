@@ -7,7 +7,7 @@ class Home extends React.Component {
         constructor(props)
         {
                 super(props)
-                this.handleDelete = this.props.handleDelete.bind(this)
+                this.handleDelete = this.handleDelete.bind(this)
         }
 
         handleDelete(e) {
@@ -15,15 +15,10 @@ class Home extends React.Component {
                 this.props.deletePseudo(this.props.session.id_token, this.props.session.pseudo)
                 return false
         }
+        componentWillMount() { 
+                this.props.getUserDetail(this.props.session)
+        }
 
-        componentWillMount(){
-                this.props.getUserDetail('user') 
-        
-        }
-        handleSubmit(userDetails){
-                this.props.setUserDetail(userDetails) 
-        }
-        
         render() {
 
                 var {
@@ -39,39 +34,34 @@ class Home extends React.Component {
 
                 var pseudo = this.props.session.pseudo
 
+
                 return (
 
-                        <div className='container'>
-                                
-                                <div>
-                                        <h4>Public profile</h4>
-                                        { isGetting && !isSetting && (
-                                                <h4>Checking for your personal info...</h4>
-                                        ) }
-                                        { !isGetting && !isSetting &&
-                                        <SetProfilePicture 
-                                                pseudo={pseudo} 
-                                                setUserDetail={setUserDetail}/>
-                                        <SetProfileBio 
-                                                bio={bio}
-                                                setUserDetail={setUserDetail}/>
+                <div className='container'>
+                        { isGetting && !isSetting && (
+                                <h4> Checking for personal info you entered previously...</h4>
+                        )}
+                        { !isGetting && !isSetting && (
                                         <SetProfileDetails 
-                                                firstName= {firstName}
-                                                lastName = {lastName}
-                                                email    = {email}
-                                                phone    = {phone}
-                                                setUserDetail={setUserDetail}
-                                        />}
-                                        {!isGetting && isSetting && (
-                                                <h4>Remembering your personal information...</h4>)}
-                                        <h4>Download and delete my Data</h4>
-                                        <AlertDismissable handleDelete={this.handleDelete}/>
-                                </div>
-                                }
-
-
+                                                pseudo    = {pseudo} 
+                                                bio       = {bio}
+                                                firstName = {firstName}
+                                                lastName  = {lastName}
+                                                email     = {email}
+                                                phone     = {phone}
+                                                setUserDetail={this.props.setUserDetail}/> 
+                        )}
+                        {!isGetting && isSetting && (
+                                <h4>
+                                        Storing your personal information...
+                                </h4>
+                        )}
+                        <div>
+                                <h4>Download or delete my Data</h4>
+                                <AlertDismissable handleDelete={this.handleDelete}/>
                         </div>
-                );
+                </div>
+                )
         }
 }
 

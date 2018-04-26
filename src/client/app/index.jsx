@@ -17,7 +17,14 @@ import  Login from './Containers/Login.jsx'
 import  Pseudo from './Containers/Pseudo.jsx'
 
 import  rootReducer  from './reducers.jsx'
-import { setSession, setSessionFromLocalStorage, fetchPseudo } from './actions.jsx'
+import { setSession,
+        setSessionFromLocalStorage,
+        fetchPseudo,
+        deletePseudo,
+        setUserDetail,
+        getUserDetail,
+        logout
+} from './actions.jsx'
 
 // From Auth0 
 var webAuth = new auth0.WebAuth({
@@ -50,6 +57,7 @@ const handleAuthentication = ({location}) => {
                                 store.dispatch(fetchPseudo(authResult.idToken))
                                 history.replace('/home');
                         } else if (err) {
+                                debugger;
                                 history.replace('/home');
                                 console.log(err);
                                 alert(`Error: ${err.error}. Check the console for further details.`);
@@ -62,8 +70,12 @@ const handleAuthentication = ({location}) => {
 class LearnMore  extends React.Component {
         render(){
                 return(
-                        <div>
-                        <h1>Info</h1> 
+                        <div className='container'>
+                        <h1>Concepts</h1> 
+                        <ol>
+                                <li>DNA+Bitcoin</li>
+                                <li>Human rights</li>
+                        </ol>
                         <Link to='/'>Back</Link>
                         </div>
                 )
@@ -77,10 +89,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
         deletePseudo: deletePseudo,
-        setUserDetails: setUserDetail,
+        setUserDetail: setUserDetail,
         getUserDetail: getUserDetail,
         logout: logout,
-        login: ()=> {webAuth.Authorize()}
+        login: ()=> {webAuth.authorize()}
 }
 
 class ContainerNC extends React.Component {
@@ -108,12 +120,9 @@ class ContainerNC extends React.Component {
                 } = this.props.session
 
                 // Module-level
-                var { user } = this.props.user
+                var { user, session } = this.props
 
                 const emptyPseudo =  !Boolean(pseudo.length) 
-                if(
-                 !isFetching && isAuthenticated && !emptyPseudo 
-                ){this.props.getUserDetail(pseudo, id_token)}
 
                 return (
                         <Provider store={store}>
@@ -142,7 +151,7 @@ class ContainerNC extends React.Component {
                                         { isFetching && 
                                 
                                         <Route path="/home" render={(props) =>
-                                        <h4>Retrieving your personal profile info (if you have created one).</h4> }/>}
+                                        <h4>Retrieving your info (if you have provided it).</h4> }/>}
 
                                                 
                                         { !isFetching && isAuthenticated && emptyPseudo &&
@@ -155,7 +164,7 @@ class ContainerNC extends React.Component {
                                                 You are not logged in! Please{' '}
                                                 <a
                                                         style={{ cursor: 'pointer' }}
-                                                        onClick={this.login.bind(this)}
+                                                        onClick={login.bind(this)}
                                                 >
                                                         Log In
                                                 </a>
@@ -169,7 +178,10 @@ class ContainerNC extends React.Component {
                                                         user=  {user}
                                                         session= {session}
                                                         deletePseudo={deletePseudo}
+                                                        setUserDetail={setUserDetail}
+                                                        getUserDetail={getUserDetail}
                                                         {...props}/>} /> }
+
 
                                         <Route path="/wallet" render={(props) => 
                                                 <Wallet 

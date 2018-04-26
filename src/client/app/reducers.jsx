@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 
-// Reducer
 export function session(state = 
         {
         isAuthenticated: false,
@@ -17,10 +16,11 @@ export function session(state =
                         };
                 case 'LOGOUT':
                         return {...state, 
-                                access_token: action.text,
-                                id_token: action.text,
-                                expires_at: action.text,
-                                isAuthenticated: false
+                                access_token: '',
+                                id_token: '',
+                                expires_at: '',
+                                isAuthenticated: false,
+                                pseudo: ''
                         };
                 case 'REQUEST_DELETE_PSEUDO':
                         return {...state,
@@ -64,7 +64,9 @@ export function user(
                 firstName:'',
                 lastName:'',
                 phone:'',
-                email:''
+                email:'',
+                isGetting: false,
+                isSetting: false
         },
         action
 ) {
@@ -74,29 +76,14 @@ export function user(
                                 isGetting: true
                         }
                 case 'RECEIVE_GET_USER':
-                        return {...state,
-                                firstName: action.firstName, 
-                                lastName:  action.lastName,
-                                email:     action.email,
-                                phone:     action.phone,
-                                picture:   action.picture,
-                                bio:       action.bio,
-                                isGetting: false
-                        }
+                        return Object.assign({}, state, action.payload, { isGetting: false})
                 case 'REQUEST_SET_USER':
                         return {...state,
-                                firstName: action.firstName, 
-                                lastName:  action.lastName,
-                                email:     action.email,
-                                phone:     action.phone,
-                                picture:   action.picture,
-                                bio:       action.bio,
                                 isSetting: true
                         }
                 case 'RECEIVE_SET_USER':
-                        return {...state,
-                                isSetting: false
-                        }
+                        debugger;
+                        return Object.assign({}, state, action.payload, {isSetting: false})
                 default:
                         return state
         }
@@ -107,4 +94,4 @@ const rootReducer = combineReducers({
         user 
 })
 
-export default rootReducer
+export default rootReducer;

@@ -52189,68 +52189,6 @@ var generatePath = function generatePath() {
 
 /***/ }),
 
-/***/ "./node_modules/react-router/es/index.js":
-/*!***********************************************!*\
-  !*** ./node_modules/react-router/es/index.js ***!
-  \***********************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MemoryRouter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MemoryRouter */ "./node_modules/react-router/es/MemoryRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return _MemoryRouter__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _Prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Prompt */ "./node_modules/react-router/es/Prompt.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return _Prompt__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-/* harmony import */ var _Redirect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Redirect */ "./node_modules/react-router/es/Redirect.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return _Redirect__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _Route__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Route */ "./node_modules/react-router/es/Route.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return _Route__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-/* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Router */ "./node_modules/react-router/es/Router.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return _Router__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
-/* harmony import */ var _StaticRouter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StaticRouter */ "./node_modules/react-router/es/StaticRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return _StaticRouter__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
-/* harmony import */ var _Switch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Switch */ "./node_modules/react-router/es/Switch.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return _Switch__WEBPACK_IMPORTED_MODULE_6__["default"]; });
-
-/* harmony import */ var _generatePath__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./generatePath */ "./node_modules/react-router/es/generatePath.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return _generatePath__WEBPACK_IMPORTED_MODULE_7__["default"]; });
-
-/* harmony import */ var _matchPath__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./matchPath */ "./node_modules/react-router/es/matchPath.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return _matchPath__WEBPACK_IMPORTED_MODULE_8__["default"]; });
-
-/* harmony import */ var _withRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./withRouter */ "./node_modules/react-router/es/withRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return _withRouter__WEBPACK_IMPORTED_MODULE_9__["default"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/react-router/es/matchPath.js":
 /*!***************************************************!*\
   !*** ./node_modules/react-router/es/matchPath.js ***!
@@ -58595,11 +58533,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58609,26 +58543,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MapStateToProps = function MapStateToProps(state) {
-        return { isAuthenticated: state.session.isAuthenticated };
-};
+var App = function (_Component) {
+        _inherits(App, _Component);
 
-var MapDispatchToProps = { logout: _actions.logout };
+        function App() {
+                _classCallCheck(this, App);
 
-var AppNC = function (_Component) {
-        _inherits(AppNC, _Component);
-
-        function AppNC() {
-                _classCallCheck(this, AppNC);
-
-                var _this = _possibleConstructorReturn(this, (AppNC.__proto__ || Object.getPrototypeOf(AppNC)).call(this));
+                var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
                 _this.login = _this.login.bind(_this);
                 _this.logout = _this.logout.bind(_this);
                 return _this;
         }
 
-        _createClass(AppNC, [{
+        _createClass(App, [{
                 key: 'goTo',
                 value: function goTo(route) {
                         this.props.history.replace('/' + route);
@@ -58636,7 +58564,7 @@ var AppNC = function (_Component) {
         }, {
                 key: 'login',
                 value: function login() {
-                        this.props.webAuth.authorize();
+                        this.props.login();
                 }
         }, {
                 key: 'logout',
@@ -58745,12 +58673,10 @@ var AppNC = function (_Component) {
                 }
         }]);
 
-        return AppNC;
+        return App;
 }(_react.Component);
 
 ;
-
-var App = (0, _reactRedux.connect)(MapStateToProps, MapDispatchToProps)(AppNC);
 
 exports.default = App;
 
@@ -58832,17 +58758,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _Pseudo = __webpack_require__(/*! ./Pseudo.jsx */ "./src/client/app/Containers/Pseudo.jsx");
-
-var _Pseudo2 = _interopRequireDefault(_Pseudo);
-
-var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
 
 var _components = __webpack_require__(/*! ../components.jsx */ "./src/client/app/components.jsx");
 
@@ -58854,133 +58772,84 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var mapStateToProps = function mapStateToProps(state) {
-        return {
-                isAuthenticated: state.session.isAuthenticated,
-                id_token: state.session.id_token,
-                isFetching: state.session.isFetching,
-                pseudo: state.session.pseudo,
-                isGetting: state.user.isGetting,
-                iSetting: state.user.isSetting,
-                firstName: state.user.firstName,
-                lastName: state.user.lastName,
-                email: state.user.email,
-                phone: state.user.phone,
-                picture: state.user.picture,
-                bio: state.user.bio
-        };
-};
+var Home = function (_React$Component) {
+        _inherits(Home, _React$Component);
 
-var mapDispatchToProps = {
-        deletePseudo: _actions.deletePseudo,
-        setUserDetails: _actions.setUserDetail,
-        getUserDetail: _actions.getUserDetail
-};
+        function Home(props) {
+                _classCallCheck(this, Home);
 
-var HomeNC = function (_Component) {
-        _inherits(HomeNC, _Component);
+                var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-        function HomeNC(props) {
-                _classCallCheck(this, HomeNC);
-
-                var _this = _possibleConstructorReturn(this, (HomeNC.__proto__ || Object.getPrototypeOf(HomeNC)).call(this, props));
-
-                _this.login = _this.login.bind(_this);
                 _this.handleDelete = _this.handleDelete.bind(_this);
                 return _this;
         }
 
-        _createClass(HomeNC, [{
-                key: 'login',
-                value: function login() {
-                        this.props.webAuth.authorize();
-                }
-        }, {
+        _createClass(Home, [{
                 key: 'handleDelete',
                 value: function handleDelete(e) {
                         e.preventDefault();
-                        this.props.deletePseudo(this.props.id_token, this.props.pseudo);
+                        this.props.deletePseudo(this.props.session.id_token, this.props.session.pseudo);
                         return false;
+                }
+        }, {
+                key: 'componentWillMount',
+                value: function componentWillMount() {
+                        this.props.getUserDetail(this.props.session);
                 }
         }, {
                 key: 'render',
                 value: function render() {
-                        var _props = this.props,
-                            isAuthenticated = _props.isAuthenticated,
-                            isFetching = _props.isFetching,
-                            isGetting = _props.isGetting,
-                            isSetting = _props.isSetting,
-                            pseudo = _props.pseudo,
-                            id_token = _props.id_token,
-                            firstName = _props.firstName,
-                            lastName = _props.lastName,
-                            email = _props.email,
-                            phone = _props.phone,
-                            picture = _props.picture,
-                            bio = _props.bio;
+                        var _props$user = this.props.user,
+                            isGetting = _props$user.isGetting,
+                            isSetting = _props$user.isSetting,
+                            firstName = _props$user.firstName,
+                            lastName = _props$user.lastName,
+                            email = _props$user.email,
+                            phone = _props$user.phone,
+                            picture = _props$user.picture,
+                            bio = _props$user.bio;
 
 
-                        var emptyPseudo = !Boolean(pseudo.length);
-                        if (!isFetching && isAuthenticated && !emptyPseudo) {
-                                this.props.getUserDetail(pseudo, id_token);
-                        }
+                        var pseudo = this.props.session.pseudo;
+
                         return _react2.default.createElement(
                                 'div',
                                 { className: 'container' },
-                                isFetching && _react2.default.createElement(
+                                isGetting && !isSetting && _react2.default.createElement(
                                         'h4',
                                         null,
-                                        'Retrieving your personal profile info (if you have created one).'
+                                        ' Checking for personal info you entered previously...'
                                 ),
-                                !isFetching && isAuthenticated && !emptyPseudo && _react2.default.createElement(
+                                !isGetting && !isSetting && _react2.default.createElement(_components.SetProfileDetails, {
+                                        pseudo: pseudo,
+                                        bio: bio,
+                                        firstName: firstName,
+                                        lastName: lastName,
+                                        email: email,
+                                        phone: phone,
+                                        setUserDetail: this.props.setUserDetail }),
+                                !isGetting && isSetting && _react2.default.createElement(
+                                        'h4',
+                                        null,
+                                        'Storing your personal information...'
+                                ),
+                                _react2.default.createElement(
                                         'div',
                                         null,
                                         _react2.default.createElement(
                                                 'h4',
                                                 null,
-                                                'Public profile'
-                                        ),
-                                        _react2.default.createElement(_components.SetProfilePicture, { pseudo: pseudo }),
-                                        _react2.default.createElement(_components.SetProfileBio, { bio: bio }),
-                                        _react2.default.createElement(_components.SetProfileDetails, {
-                                                firstName: firstName,
-                                                lastName: lastName,
-                                                email: email,
-                                                phone: phone,
-                                                picture: picture
-                                        }),
-                                        _react2.default.createElement(
-                                                'h4',
-                                                null,
-                                                'Download and delete my Data'
+                                                'Download or delete my Data'
                                         ),
                                         _react2.default.createElement(_components.AlertDismissable, { handleDelete: this.handleDelete })
-                                ),
-                                !isFetching && isAuthenticated && emptyPseudo && _react2.default.createElement(_Pseudo2.default, null),
-                                !isFetching && !isAuthenticated && _react2.default.createElement(
-                                        'h4',
-                                        null,
-                                        'You are not logged in! Please',
-                                        ' ',
-                                        _react2.default.createElement(
-                                                'a',
-                                                {
-                                                        style: { cursor: 'pointer' },
-                                                        onClick: this.login.bind(this)
-                                                },
-                                                'Log In'
-                                        ),
-                                        ' ',
-                                        'to continue.'
                                 )
                         );
                 }
         }]);
 
-        return HomeNC;
-}(_react.Component);
+        return Home;
+}(_react2.default.Component);
 
-var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(HomeNC);
 exports.default = Home;
 
 /***/ }),
@@ -59007,11 +58876,7 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _actions = __webpack_require__(/*! ../actions.jsx */ "./src/client/app/actions.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59021,26 +58886,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MapStateToProps = function MapStateToProps(state) {
-        return { isAuthenticated: state.session.isAuthenticated };
-};
+var Login = function (_Component) {
+        _inherits(Login, _Component);
 
-var MapDispatchToProps = { logout: _actions.logout };
+        function Login() {
+                _classCallCheck(this, Login);
 
-var LoginNC = function (_Component) {
-        _inherits(LoginNC, _Component);
-
-        function LoginNC() {
-                _classCallCheck(this, LoginNC);
-
-                var _this = _possibleConstructorReturn(this, (LoginNC.__proto__ || Object.getPrototypeOf(LoginNC)).call(this));
+                var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this));
 
                 _this.login = _this.login.bind(_this);
                 _this.logout = _this.logout.bind(_this);
                 return _this;
         }
 
-        _createClass(LoginNC, [{
+        _createClass(Login, [{
                 key: 'goTo',
                 value: function goTo(route) {
                         this.props.history.replace('/' + route);
@@ -59048,7 +58907,7 @@ var LoginNC = function (_Component) {
         }, {
                 key: 'login',
                 value: function login() {
-                        this.props.webAuth.authorize();
+                        this.props.login();
                 }
         }, {
                 key: 'logout',
@@ -59058,7 +58917,6 @@ var LoginNC = function (_Component) {
         }, {
                 key: 'render',
                 value: function render() {
-                        var linlkStyle = { color: 'black' };
                         var isAuthenticated = this.props.isAuthenticated;
                         return _react2.default.createElement(
                                 _reactBootstrap.Row,
@@ -59080,12 +58938,12 @@ var LoginNC = function (_Component) {
                                                                 _react2.default.createElement(
                                                                         'h1',
                                                                         null,
-                                                                        'My health, my heritage'
+                                                                        'How much is my health worth?'
                                                                 ),
                                                                 _react2.default.createElement(
                                                                         'p',
                                                                         null,
-                                                                        'Upload, manage and use your health data to live better and longer.'
+                                                                        'DNA-ID associates your DNA to a bitcoin wallet that you own and use to participate in the new health economy.'
                                                                 ),
                                                                 _react2.default.createElement(
                                                                         _reactRouterDom.Link,
@@ -59102,12 +58960,10 @@ var LoginNC = function (_Component) {
                 }
         }]);
 
-        return LoginNC;
+        return Login;
 }(_react.Component);
 
 ;
-
-var Login = (0, _reactRedux.connect)(MapStateToProps, MapDispatchToProps)(LoginNC);
 
 exports.default = Login;
 
@@ -59400,23 +59256,19 @@ exports.deletePseudo = deletePseudo;
 exports.setUserDetail = setUserDetail;
 exports.getUserDetail = getUserDetail;
 
-var _reactRouter = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
-
 var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 // Session
 var setSession = exports.setSession = function setSession(authResult) {
         authResult.expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
         // persist locally in case of reload
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', authResult.expiresAt);
+        localStorage.setItem('access_token', JSON.stringify(authResult.accessToken));
+        localStorage.setItem('id_token', JSON.stringify(authResult.idToken));
+        localStorage.setItem('expires_at', JSON.stringify(authResult.expiresAt));
         return {
                 type: 'SET_SESSION',
                 authResult: authResult
@@ -59446,7 +59298,6 @@ var logout = exports.logout = function logout() {
 
 // User
 // Un-registered: set pseudo
-
 var requestSetPseudo = function requestSetPseudo(pseudo) {
         return { type: 'REQUEST_SET_PSEUDO' };
 };
@@ -59528,7 +59379,6 @@ function fetchPseudo(id_token) {
 }
 
 // Delete user
-
 var requestDeletePseudo = function requestDeletePseudo() {
         return { type: 'REQUEST_DELETE_PSEUDO' };
 };
@@ -59569,45 +59419,95 @@ function deletePseudo(id_token, pseudo) {
 }
 
 // Set user detail
-
-var requestSetUserDetail = function requestSetUserDetail(category, subcategory, key, text, json) {
-        return _defineProperty({ type: 'REQUEST_SET_USER'
-        }, key.subkey, val.subval);
+var requestSetUserDetail = function requestSetUserDetail() {
+        return { type: 'REQUEST_SET_USER'
+        };
 };
 
-var receiveSetUserDetail = function receiveSetUserDetail(success) {
+var receiveSetUserDetail = function receiveSetUserDetail(success, payload) {
         if (success) {
-                return { type: 'RECEIVE_SET_PSEUDO' };
+                return { type: 'RECEIVE_SET_USER',
+                        payload: payload };
         }
 };
 
-function setUserDetail(obj, id_token) {
+var initVars = function initVars(fromNew, fromState, fromInit) {
 
-        return function (dispatch) {
-                dispatch(requestSetUserDetail());
+        var matches = [fromNew, fromInit, fromState]
+        //Not empty
+        .map(function (y) {
+                return Object.keys(y).filter(function (x) {
+                        return y[x] !== "" && y[x] != 'undefined';
+                });
+        })
+        // flatten
+        .reduce(function (flat, toFlaten) {
+                return flat.concat(toFlaten);
+        }, [])
+        //unique
+        .filter(function (v, i, a) {
+                return a.indexOf(v) === i;
+        });
+
+        var out = {};
+        for (var i = 0; i <= matches.length - 1; i++) {
+                var idx = matches[i];
+
+                if (Object.keys(fromInit).map(function (x) {
+                        return x === idx;
+                }).reduce(function (x, y) {
+                        return y ? x + y : x;
+                }, 0) > 0) {
+
+                        out[idx] = fromNew[idx] || fromState[idx] || fromInit[idx];
+                }
+        }
+        return out;
+};
+
+function setUserDetail(path, obj) {
+        return function (dispatch, getState) {
+                var fromInit = {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phone: '',
+                        picture: '',
+                        bio: ''
+                };
+
+                var moduleStore = 'user';
+
+                var fromNew = obj;
+                var fromState = getState()[path];
+
+                var hydratedData = initVars(fromNew = fromNew, fromState = fromState, fromInit = fromInit);
 
                 return (0, _axios2.default)({
                         baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
-                        url: 'updateUserJSON',
+                        url: 'updateUser',
                         method: 'post',
                         params: {
-                                json: JSON.stringify(obj)
+                                DBPath: path,
+                                json: JSON.stringify(hydratedData)
                         },
                         headers: {
-                                Authorization: 'Bearer ' + id_token
+                                Authorization: 'Bearer ' + getState().session.id_token
+
                         }
                 }).then(function (res) {
-                        var ok = void 0;
+                        debugger;
                         if (res.status === 201) {
-                                ok = true;
+                                var ok = true;
+                                return ok;
                         }
-
-                        return ok;
                 }, function (error) {
                         return console.log('An error occurred.', error);
                 }).then(function (ok) {
                         if (ok) {
-                                dispatch(receiveSetUserDetail());
+
+                                debugger;
+                                dispatch(receiveSetUserDetail(ok, obj));
                         }
                 });
         };
@@ -59619,25 +59519,26 @@ var requestGetUserDetail = function requestGetUserDetail() {
         return { type: 'REQUEST_GET_USER' };
 };
 
-var receiveGetUserDetail = function receiveGetUserDetail(data) {
+var receiveGetUserDetail = function receiveGetUserDetail(payload) {
         return { type: 'RECEIVE_GET_USER',
-                data: data };
+                payload: payload };
 };
 
-function getUserDetail(pseudo, id_token) {
+function getUserDetail() {
 
-        return function (dispatch) {
+        return function (dispatch, getState) {
                 dispatch(requestGetUserDetail());
-
+                var session = getState().session;
                 return (0, _axios2.default)({
                         baseURL: 'https://wt-davidweiss-dnavid_com-0.run.webtask.io/dnavidDBAPI.js',
                         url: 'getUser',
                         method: 'get',
                         params: {
-                                pseudo: pseudo
+                                pseudo: session.pseudo,
+                                cat: 'user'
                         },
                         headers: {
-                                Authorization: 'Bearer ' + id_token
+                                Authorization: 'Bearer ' + session.id_token
                         }
                 }).then(function (res) {
                         if (res.status === 200) {
@@ -59646,7 +59547,12 @@ function getUserDetail(pseudo, id_token) {
                 }, function (error) {
                         return console.log('An error occurred.', error);
                 }).then(function (data) {
-                        dispatch(receiveGetUserDetail(data));
+                        if (typeof data !== 'undefined' && data != '') {
+                                dispatch(receiveGetUserDetail(data));
+                        } else {
+                                var dataInit = {};
+                                dispatch(receiveGetUserDetail(dataInit));
+                        }
                 });
         };
 }
@@ -59669,7 +59575,7 @@ Object.defineProperty(exports, "__esModule", {
 var AUTH_CONFIG = exports.AUTH_CONFIG = {
           domain: 'dnavid.auth0.com',
           clientId: 'DKYRjMDoaLlPwmdDcGWGshIHFuwXwtMZ',
-          callbackUrl: 'https://reactapp.cloud/callback'
+          callbackUrl: 'https://dnavid.com/callback'
 };
 
 /***/ }),
@@ -59687,7 +59593,7 @@ var AUTH_CONFIG = exports.AUTH_CONFIG = {
 Object.defineProperty(exports, "__esModule", {
         value: true
 });
-exports.SetProfileDetails = exports.SetProfileBio = exports.SetProfilePicture = exports.AlertDismissable = undefined;
+exports.SetProfileDetails = exports.AlertDismissable = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -59818,35 +59724,54 @@ var AlertDismissable = exports.AlertDismissable = function (_React$Component) {
         return AlertDismissable;
 }(_react2.default.Component);
 
-var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2) {
-        _inherits(SetProfilePicture, _React$Component2);
+var SetProfileDetails = exports.SetProfileDetails = function (_React$Component2) {
+        _inherits(SetProfileDetails, _React$Component2);
 
-        function SetProfilePicture(props) {
-                _classCallCheck(this, SetProfilePicture);
+        function SetProfileDetails(props) {
+                _classCallCheck(this, SetProfileDetails);
 
-                var _this2 = _possibleConstructorReturn(this, (SetProfilePicture.__proto__ || Object.getPrototypeOf(SetProfilePicture)).call(this, props));
+                var _this2 = _possibleConstructorReturn(this, (SetProfileDetails.__proto__ || Object.getPrototypeOf(SetProfileDetails)).call(this, props));
 
-                _this2.state = {
-                        picture: false,
-                        helpMessage: "Choose picture",
-                        files: undefined
-                };
+                if (typeof _this2.props.bio === 'undefined') {
+                        console.log("bio is undefined");
+                        _this2.state = {
+                                bio: "",
+                                firstName: "",
+                                lastName: "",
+                                phone: "",
+                                email: "",
+                                picture: false,
+                                helpMessage: "Choose picture",
+                                files: undefined
+
+                        };
+                } else {
+                        _this2.state = {
+                                "bio": _this2.props.bio,
+                                "firstName": _this2.props.firstName,
+                                "lastName": _this2.props.lastName,
+                                "phone": _this2.props.phone,
+                                "email": _this2.props.email
+                        };
+                }
+                _this2.handleChangeFile = _this2.handleChangeFile.bind(_this2);
+                _this2.handleSubmitFile = _this2.handleSubmitFile.bind(_this2);
                 _this2.handleChange = _this2.handleChange.bind(_this2);
                 _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
                 return _this2;
         }
 
-        _createClass(SetProfilePicture, [{
-                key: 'handleChange',
-                value: function handleChange(event) {
+        _createClass(SetProfileDetails, [{
+                key: 'handleChangeFile',
+                value: function handleChangeFile(event) {
                         this.setState({
                                 files: event.target.files,
                                 helpMessage: "Uploading " + event.target.files[0].name
                         });
                 }
         }, {
-                key: 'handleSubmit',
-                value: function handleSubmit(event) {
+                key: 'handleSubmitFile',
+                value: function handleSubmitFile(event) {
                         var data = new FormData();
                         data.append('file', this.state.files[0]);
                         var config = {
@@ -59867,6 +59792,22 @@ var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2)
                         }).catch(function (err) {
                                 this.setState({ "helpMessage": "oh, snap!" });
                         });
+                }
+        }, {
+                key: 'handleChange',
+                value: function handleChange(event) {
+                        this.setState(_defineProperty({}, event.target.name, event.target.value));
+                }
+        }, {
+                key: 'handleSubmit',
+                value: function handleSubmit() {
+                        var _obj;
+
+                        var obj = (_obj = {}, _defineProperty(_obj, 'bio', this.state.bio), _defineProperty(_obj, 'firstName', this.state.firstName), _defineProperty(_obj, 'lastName', this.state.lastName), _defineProperty(_obj, 'phone', this.state.phone), _defineProperty(_obj, 'email', this.state.email), _defineProperty(_obj, 'picture', this.state.picture), _obj);
+
+                        var path = 'user';
+
+                        this.props.setUserDetail(path = path, obj = obj);
                 }
         }, {
                 key: 'render',
@@ -59901,7 +59842,7 @@ var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2)
                                                 { xs: 12, sm: 12, md: 12, lg: 12 },
                                                 _react2.default.createElement(
                                                         'form',
-                                                        { onSubmit: this.handleSubmit },
+                                                        { onSubmit: this.handleSubmitForm },
                                                         _react2.default.createElement(
                                                                 _reactBootstrap.FormGroup,
                                                                 { controlId: 'formControlFile' },
@@ -59910,7 +59851,7 @@ var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2)
                                                                         null,
                                                                         'Upload your picture'
                                                                 ),
-                                                                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'file', onChange: this.state.handleChange }),
+                                                                _react2.default.createElement(_reactBootstrap.FormControl, { type: 'file', onChange: this.handleChangeForm }),
                                                                 this.state.helpMessage && _react2.default.createElement(
                                                                         _reactBootstrap.HelpBlock,
                                                                         null,
@@ -59924,192 +59865,90 @@ var SetProfilePicture = exports.SetProfilePicture = function (_React$Component2)
                                                         )
                                                 )
                                         )
-                                )
-                        );
-                }
-        }]);
-
-        return SetProfilePicture;
-}(_react2.default.Component);
-
-var SetProfileBio = exports.SetProfileBio = function (_React$Component3) {
-        _inherits(SetProfileBio, _React$Component3);
-
-        function SetProfileBio(props) {
-                _classCallCheck(this, SetProfileBio);
-
-                var _this3 = _possibleConstructorReturn(this, (SetProfileBio.__proto__ || Object.getPrototypeOf(SetProfileBio)).call(this, props));
-
-                if (typeof _this3.props.bio === 'undefined') {
-                        console.log("bio is undefined");
-                        _this3.state = {
-                                "bio": ""
-                        };
-                } else {
-                        _this3.state = {
-                                "bio": _this3.props.bio
-                        };
-                }
-                _this3.handleChange = _this3.handleChange.bind(_this3);
-                _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
-
-                return _this3;
-        }
-
-        _createClass(SetProfileBio, [{
-                key: 'handleChange',
-                value: function handleChange(event) {
-                        this.setState(_defineProperty({}, event.target.name, event.target.value));
-                }
-        }, {
-                key: 'handleSubmit',
-                value: function handleSubmit(event) {
-                        setUser({
-                                category: "profile",
-                                key: "bio",
-                                text: this.state.bio
-                        });
-                }
-        }, {
-                key: 'render',
-                value: function render() {
-                        return _react2.default.createElement(
-                                _reactBootstrap.Row,
-                                null,
+                                ),
                                 _react2.default.createElement(
-                                        _reactBootstrap.Col,
-                                        { xs: 8, sm: 8, md: 5, lg: 4 },
+                                        _reactBootstrap.Row,
+                                        null,
                                         _react2.default.createElement(
-                                                'form',
-                                                { onSubmit: this.handleSubmit },
-                                                _react2.default.createElement(FieldGroup, {
-                                                        style: { minHeight: 145 },
-                                                        id: 'formControlsTextarea',
-                                                        componentClass: 'textarea',
-                                                        name: 'bio',
-                                                        type: 'textarea',
-                                                        label: 'Bio',
-                                                        placeholder: 'Why I\'m interested in DNA. Is there something that runs in my family that could be due to DNA. Max. 120 characters.',
-                                                        value: this.state.bio,
-                                                        onChange: this.handleChange
-                                                })
-                                        )
-                                )
-                        );
-                }
-        }]);
-
-        return SetProfileBio;
-}(_react2.default.Component);
-
-var SetProfileDetails = exports.SetProfileDetails = function (_React$Component4) {
-        _inherits(SetProfileDetails, _React$Component4);
-
-        function SetProfileDetails(props) {
-                _classCallCheck(this, SetProfileDetails);
-
-                var _this4 = _possibleConstructorReturn(this, (SetProfileDetails.__proto__ || Object.getPrototypeOf(SetProfileDetails)).call(this, props));
-
-                if (typeof _this4.props.private === 'undefined') {
-                        _this4.state = {
-                                "firstName": "",
-                                "lastName": "",
-                                "email": "",
-                                "phone": ""
-                        };
-                } else {
-                        _this4.state = {
-                                "firstName": _this4.props.firstName,
-                                "lastName": _this4.props.lastName,
-                                "email": _this4.props.email,
-                                "phone": _this4.props.phone
-                        };
-                }
-                _this4.handleChange = _this4.handleChange.bind(_this4);
-                _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
-
-                return _this4;
-        }
-
-        _createClass(SetProfileDetails, [{
-                key: 'handleChange',
-                value: function handleChange(event) {
-                        this.setState(_defineProperty({}, event.target.name, event.target.value));
-                }
-        }, {
-                key: 'handleSubmit',
-                value: function handleSubmit(event) {
-                        var text = {
-                                firstName: this.state.firstName,
-                                lastName: this.state.lastName,
-                                email: this.state.email,
-                                phone: this.state.phone
-                        };
-
-                        setUser({
-                                category: "profile",
-                                key: "private",
-                                text: text,
-                                json: true
-                        });
-                }
-        }, {
-                key: 'render',
-                value: function render() {
-                        return _react2.default.createElement(
-                                _reactBootstrap.Row,
-                                null,
-                                _react2.default.createElement(
-                                        _reactBootstrap.Col,
-                                        { xs: 6, sm: 6, md: 3, lg: 3 },
-                                        _react2.default.createElement(
-                                                'h4',
-                                                null,
-                                                'Personal Details'
-                                        ),
-                                        _react2.default.createElement(
-                                                'form',
-                                                { onSubmit: this.handleSubmit },
-                                                _react2.default.createElement(FieldGroup, {
-                                                        id: 'formControlsText',
-                                                        name: 'firstName',
-                                                        type: 'text',
-                                                        label: 'First Name',
-                                                        placeholder: 'First name',
-                                                        value: this.state.firstName,
-                                                        onChange: this.handleChange
-                                                }),
-                                                _react2.default.createElement(FieldGroup, {
-                                                        id: 'formControlsText',
-                                                        name: 'lastName',
-                                                        type: 'text',
-                                                        label: 'Last Name',
-                                                        placeholder: 'Last name',
-                                                        value: this.state.lastName,
-                                                        onChange: this.handleChange
-                                                }),
-                                                _react2.default.createElement(FieldGroup, {
-                                                        id: 'formControlsText',
-                                                        type: 'text',
-                                                        name: 'phone',
-                                                        label: 'Phone',
-                                                        placeholder: 'Phone',
-                                                        value: this.state.phone,
-                                                        onChange: this.handleChange
-                                                }),
-                                                _react2.default.createElement(FieldGroup, {
-                                                        id: 'formControlsText',
-                                                        name: 'email',
-                                                        type: 'email',
-                                                        label: 'email',
-                                                        placeholder: 'Email',
-                                                        value: this.state.email,
-                                                        onChange: this.handleChange
-                                                }),
+                                                _reactBootstrap.Col,
+                                                { xs: 8, sm: 8, md: 5, lg: 4 },
                                                 _react2.default.createElement(
-                                                        _reactBootstrap.Button,
-                                                        { type: 'submit' },
-                                                        ' Update details'
+                                                        'form',
+                                                        { onSubmit: this.handleSubmit },
+                                                        _react2.default.createElement(FieldGroup, {
+                                                                style: { minHeight: 100 },
+                                                                id: 'formControlsTextarea',
+                                                                componentClass: 'textarea',
+                                                                name: 'bio',
+                                                                type: 'textarea',
+                                                                label: 'Bio',
+                                                                placeholder: 'Why I\'m interested in DNA. Is there something that runs in my family that could be due to DNA. Max. 120 characters.',
+                                                                value: this.state.bio,
+                                                                onChange: this.handleChange
+                                                        }),
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Button,
+                                                                { type: 'submit' },
+                                                                ' Update bio '
+                                                        )
+                                                )
+                                        )
+                                ),
+                                _react2.default.createElement(
+                                        _reactBootstrap.Row,
+                                        null,
+                                        _react2.default.createElement(
+                                                _reactBootstrap.Col,
+                                                { xs: 6, sm: 6, md: 3, lg: 3 },
+                                                _react2.default.createElement(
+                                                        'h4',
+                                                        null,
+                                                        'Personal Details'
+                                                ),
+                                                _react2.default.createElement(
+                                                        'form',
+                                                        { onSubmit: this.handleSubmit },
+                                                        _react2.default.createElement(FieldGroup, {
+                                                                id: 'formControlsText',
+                                                                name: 'firstName',
+                                                                type: 'text',
+                                                                label: 'First Name',
+                                                                placeholder: 'First name',
+                                                                value: this.state.firstName,
+                                                                onChange: this.handleChange
+                                                        }),
+                                                        _react2.default.createElement(FieldGroup, {
+                                                                id: 'formControlsText',
+                                                                name: 'lastName',
+                                                                type: 'text',
+                                                                label: 'Last Name',
+                                                                placeholder: 'Last name',
+                                                                value: this.state.lastName,
+                                                                onChange: this.handleChange
+                                                        }),
+                                                        _react2.default.createElement(FieldGroup, {
+                                                                id: 'formControlsText',
+                                                                type: 'text',
+                                                                name: 'phone',
+                                                                label: 'Phone',
+                                                                placeholder: 'Phone',
+                                                                value: this.state.phone,
+                                                                onChange: this.handleChange
+                                                        }),
+                                                        _react2.default.createElement(FieldGroup, {
+                                                                id: 'formControlsText',
+                                                                name: 'email',
+                                                                type: 'email',
+                                                                label: 'email',
+                                                                placeholder: 'Email',
+                                                                value: this.state.email,
+                                                                onChange: this.handleChange
+                                                        }),
+                                                        _react2.default.createElement(
+                                                                _reactBootstrap.Button,
+                                                                { type: 'submit' },
+                                                                ' Update details'
+                                                        )
                                                 )
                                         )
                                 )
@@ -60206,6 +60045,10 @@ var _Login = __webpack_require__(/*! ./Containers/Login.jsx */ "./src/client/app
 
 var _Login2 = _interopRequireDefault(_Login);
 
+var _Pseudo = __webpack_require__(/*! ./Containers/Pseudo.jsx */ "./src/client/app/Containers/Pseudo.jsx");
+
+var _Pseudo2 = _interopRequireDefault(_Pseudo);
+
 var _reducers = __webpack_require__(/*! ./reducers.jsx */ "./src/client/app/reducers.jsx");
 
 var _reducers2 = _interopRequireDefault(_reducers);
@@ -60232,17 +60075,17 @@ var webAuth = new _auth0Js2.default.WebAuth({
         scope: 'openid'
 });
 
-// Create store
+// Create state management store
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 var store = (0, _redux.createStore)(_reducers2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
-//
-// Local session?
+
+// Use local session on reload
 if (typeof localStorage.getItem('expires_at') !== 'undefined' && JSON.parse(localStorage.getItem('expires_at')) > new Date().getTime()) {
         store.dispatch((0, _actions.setSessionFromLocalStorage)());
         store.dispatch((0, _actions.fetchPseudo)(localStorage.getItem('id_token')));
 }
 
-// Handle authentication
+// Handle after redirection from authentication service
 var handleAuthentication = function handleAuthentication(_ref) {
         var location = _ref.location;
 
@@ -60253,6 +60096,7 @@ var handleAuthentication = function handleAuthentication(_ref) {
                                 store.dispatch((0, _actions.fetchPseudo)(authResult.idToken));
                                 _history2.default.replace('/home');
                         } else if (err) {
+                                debugger;
                                 _history2.default.replace('/home');
                                 console.log(err);
                                 alert('Error: ' + err.error + '. Check the console for further details.');
@@ -60275,11 +60119,25 @@ var LearnMore = function (_React$Component) {
                 value: function render() {
                         return _react2.default.createElement(
                                 'div',
-                                null,
+                                { className: 'container' },
                                 _react2.default.createElement(
                                         'h1',
                                         null,
-                                        'Info'
+                                        'Concepts'
+                                ),
+                                _react2.default.createElement(
+                                        'ol',
+                                        null,
+                                        _react2.default.createElement(
+                                                'li',
+                                                null,
+                                                'DNA+Bitcoin'
+                                        ),
+                                        _react2.default.createElement(
+                                                'li',
+                                                null,
+                                                'Human rights'
+                                        )
                                 ),
                                 _react2.default.createElement(
                                         _reactRouterDom.Link,
@@ -60293,40 +60151,157 @@ var LearnMore = function (_React$Component) {
         return LearnMore;
 }(_react2.default.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(
-        _reactRedux.Provider,
-        { store: store },
-        _react2.default.createElement(
-                _reactRouterDom.Router,
-                { history: _history2.default },
-                _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
-                                        return _react2.default.createElement(_App2.default, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, render: function render(props) {
-                                        return _react2.default.createElement(_Login2.default, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/splash', render: function render(props) {
-                                        return _react2.default.createElement(_Login2.default, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/splash/learnmore', exact: true, render: function render(props) {
-                                        return _react2.default.createElement(LearnMore, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
-                                        return _react2.default.createElement(_Home2.default, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/wallet', render: function render(props) {
-                                        return _react2.default.createElement(_Wallet2.default, _extends({ webAuth: webAuth }, props));
-                                } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/callback', render: function render(props) {
-                                        handleAuthentication(props);
-                                        return _react2.default.createElement(_Callback2.default, props);
-                                } })
-                )
-        )
-), document.getElementById('root'));
+var mapStateToProps = function mapStateToProps(state) {
+        return {
+                session: state.session,
+                user: state.user
+        };
+};
+
+var mapDispatchToProps = {
+        deletePseudo: _actions.deletePseudo,
+        setUserDetail: _actions.setUserDetail,
+        getUserDetail: _actions.getUserDetail,
+        logout: _actions.logout,
+        login: function login() {
+                webAuth.authorize();
+        }
+};
+
+var ContainerNC = function (_React$Component2) {
+        _inherits(ContainerNC, _React$Component2);
+
+        function ContainerNC() {
+                _classCallCheck(this, ContainerNC);
+
+                return _possibleConstructorReturn(this, (ContainerNC.__proto__ || Object.getPrototypeOf(ContainerNC)).apply(this, arguments));
+        }
+
+        _createClass(ContainerNC, [{
+                key: 'render',
+                value: function render() {
+                        var _this3 = this;
+
+                        // Dispatch=wrapped action creators
+                        var _props = this.props,
+                            deletePseudo = _props.deletePseudo,
+                            setUserDetail = _props.setUserDetail,
+                            getUserDetail = _props.getUserDetail,
+                            logout = _props.logout,
+                            login = _props.login;
+                        // App level
+
+                        var _props2 = this.props,
+                            store = _props2.store,
+                            webAuth = _props2.webAuth,
+                            history = _props2.history;
+                        var _props$session = this.props.session,
+                            isAuthenticated = _props$session.isAuthenticated,
+                            id_token = _props$session.id_token,
+                            isFetching = _props$session.isFetching,
+                            pseudo = _props$session.pseudo;
+
+                        // Module-level
+
+                        var _props3 = this.props,
+                            user = _props3.user,
+                            session = _props3.session;
+
+
+                        var emptyPseudo = !Boolean(pseudo.length);
+
+                        return _react2.default.createElement(
+                                _reactRedux.Provider,
+                                { store: store },
+                                _react2.default.createElement(
+                                        _reactRouterDom.Router,
+                                        { history: history },
+                                        _react2.default.createElement(
+                                                'div',
+                                                null,
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(props) {
+                                                                return _react2.default.createElement(_App2.default, _extends({
+                                                                        login: login,
+                                                                        logout: logout,
+                                                                        isAuthenticated: isAuthenticated
+                                                                }, props));
+                                                        } }),
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, render: function render(props) {
+                                                                return _react2.default.createElement(_Login2.default, _extends({
+                                                                        login: login,
+                                                                        logout: logout,
+                                                                        isAuthenticated: isAuthenticated
+                                                                }, props));
+                                                        } }),
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/splash', render: function render(props) {
+                                                                return _react2.default.createElement(_Login2.default, _extends({
+                                                                        login: login,
+                                                                        logout: logout,
+                                                                        isAuthenticated: isAuthenticated
+                                                                }, props));
+                                                        } }),
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/splash/learnmore', exact: true, render: function render(props) {
+                                                                return _react2.default.createElement(LearnMore, _extends({ webAuth: webAuth }, props));
+                                                        } }),
+                                                isFetching && _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
+                                                                return _react2.default.createElement(
+                                                                        'h4',
+                                                                        null,
+                                                                        'Retrieving your info (if you have provided it).'
+                                                                );
+                                                        } }),
+                                                !isFetching && isAuthenticated && emptyPseudo && _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
+                                                                return _react2.default.createElement(_Pseudo2.default, null);
+                                                        } }),
+                                                !isFetching && !isAuthenticated && _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
+                                                                return _react2.default.createElement(
+                                                                        'h4',
+                                                                        null,
+                                                                        'You are not logged in! Please',
+                                                                        ' ',
+                                                                        _react2.default.createElement(
+                                                                                'a',
+                                                                                {
+                                                                                        style: { cursor: 'pointer' },
+                                                                                        onClick: login.bind(_this3)
+                                                                                },
+                                                                                'Log In'
+                                                                        ),
+                                                                        ' ',
+                                                                        'to continue.'
+                                                                );
+                                                        } }),
+                                                !isFetching && isAuthenticated && !emptyPseudo && _react2.default.createElement(_reactRouterDom.Route, { path: '/home', render: function render(props) {
+                                                                return _react2.default.createElement(_Home2.default, _extends({
+                                                                        user: user,
+                                                                        session: session,
+                                                                        deletePseudo: deletePseudo,
+                                                                        setUserDetail: setUserDetail,
+                                                                        getUserDetail: getUserDetail
+                                                                }, props));
+                                                        } }),
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/wallet', render: function render(props) {
+                                                                return _react2.default.createElement(_Wallet2.default, _extends({
+                                                                        user: user,
+                                                                        session: session
+                                                                }, props));
+                                                        } }),
+                                                _react2.default.createElement(_reactRouterDom.Route, { path: '/callback', render: function render(props) {
+                                                                handleAuthentication(props);
+                                                                return _react2.default.createElement(_Callback2.default, props);
+                                                        } })
+                                        )
+                                )
+                        );
+                }
+        }]);
+
+        return ContainerNC;
+}(_react2.default.Component);
+
+var Container = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerNC);
+
+(0, _reactDom.render)(_react2.default.createElement(Container, { webAuth: webAuth, store: store, history: _history2.default }), document.getElementById('root'));
 
 /***/ }),
 
@@ -60351,7 +60326,6 @@ exports.user = user;
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 
-// Reducer
 function session() {
         var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
                 isAuthenticated: false,
@@ -60369,10 +60343,11 @@ function session() {
                         });
                 case 'LOGOUT':
                         return _extends({}, state, {
-                                access_token: action.text,
-                                id_token: action.text,
-                                expires_at: action.text,
-                                isAuthenticated: false
+                                access_token: '',
+                                id_token: '',
+                                expires_at: '',
+                                isAuthenticated: false,
+                                pseudo: ''
                         });
                 case 'REQUEST_DELETE_PSEUDO':
                         return _extends({}, state, {
@@ -60416,7 +60391,9 @@ function user() {
                 firstName: '',
                 lastName: '',
                 phone: '',
-                email: ''
+                email: '',
+                isGetting: false,
+                isSetting: false
         };
         var action = arguments[1];
 
@@ -60426,29 +60403,14 @@ function user() {
                                 isGetting: true
                         });
                 case 'RECEIVE_GET_USER':
-                        return _extends({}, state, {
-                                firstName: action.firstName,
-                                lastName: action.lastName,
-                                email: action.email,
-                                phone: action.phone,
-                                picture: action.picture,
-                                bio: action.bio,
-                                isGetting: false
-                        });
+                        return Object.assign({}, state, action.payload, { isGetting: false });
                 case 'REQUEST_SET_USER':
                         return _extends({}, state, {
-                                firstName: action.firstName,
-                                lastName: action.lastName,
-                                email: action.email,
-                                phone: action.phone,
-                                picture: action.picture,
-                                bio: action.bio,
                                 isSetting: true
                         });
                 case 'RECEIVE_SET_USER':
-                        return _extends({}, state, {
-                                isSetting: false
-                        });
+                        debugger;
+                        return Object.assign({}, state, action.payload, { isSetting: false });
                 default:
                         return state;
         }
