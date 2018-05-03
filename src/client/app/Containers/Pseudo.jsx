@@ -3,14 +3,21 @@ import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock } from '
 import { connect } from 'react-redux'
 import { setPseudo } from '../actions.jsx'
 import { FieldGroup } from '../components.jsx'
+import { Redirect} from 'react-router-dom'
 
-const mapStateToProps = state => ({ wasDeleted: state.session.wasDeleted, id_token: state.session.id_token, isAvailable: state.session.isAvailable, isSetting: state.session.isSetting, pseudo: state.session.pseudo})
-const mapDispatchToProps = {setPseudo: setPseudo}
-
+const mapStateToProps = state => (
+	{ 
+		isRegistered: state.session.isRegistered, 
+		isAvailable: state.session.isAvailable,
+		id_token: state.session.id_token, 
+		isSetting: state.session.isSetting,
+		pseudo: state.session.pseudo
+	})
+const mapDispatchToProps = ({setPseudo: setPseudo})
 
 class PseudoNC extends React.Component {
-        constructor(props, context) {
-                super(props, context);
+        constructor(props) {
+                super(props);
                 this.handleChange = this.handleChange.bind(this);
                 this.handleSubmit= this.handleSubmit.bind(this);
                 this.state = {
@@ -29,6 +36,9 @@ class PseudoNC extends React.Component {
         render() {
                 return (
                         <div>
+				{ this.props.isRegistered  &&
+				<Redirect to='/home'/>
+				}
                                 <form onSubmit={this.handleSubmit}>
                                         <FormGroup
                                                 controlId="formBasicText"
@@ -50,7 +60,7 @@ class PseudoNC extends React.Component {
                                         <Alert> Checking for availability: {this.state.value} </Alert>
                                 
                                 )}
-                                { this.props.isAvailable === true && this.props.wasDeleted === false && (
+                                { this.props.isAvailable === true &&  (
                                         <Alert> It is available and set: {this.state.value} </Alert>
                                 
                                 )}

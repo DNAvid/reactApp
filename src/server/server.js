@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require("webpack-hot-middleware")
 var fs = require('fs');
 // key not synched on git
-var key = fs.readFileSync('/etc/letsencrypt/archive/dnavid.com/privkey1.pem');
-var cert = fs.readFileSync('/etc/letsencrypt/archive/dnavid.com/fullchain1.pem');
+var key = fs.readFileSync('/etc/letsencrypt/archive/dev.dnavid.com/privkey1.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/archive/dev.dnavid.com/fullchain1.pem');
 var https = require('https');
 var http = require('http');
 var express = require('express');
@@ -17,19 +18,19 @@ var PORT = 443;
 var HOST = '0.0.0.0';
 app = express();
 
-const dev = false;
-if (dev){
-const config = require('../../webpack.config.js');
+const config = require('/home/davidweisss/reactApp/webpack.config.js');
 const compiler = webpack(config);
 
 app.use(webpackDevMiddleware(compiler, {
-        publicPath: config.output.publicPath,
-        watch:true,
-        watchOptions:{} 
-}));
-}
-
-
+                public: 'reactapp.cloud:443',
+                host: '0.0.0.0',
+                port: 443,
+                contentBase: 'src/client/',
+                compress: true,
+		hot:true
+        }
+));
+app.use(webpackHotMiddleware(compiler));
 
 app.get('/', function (req, res) {
 	res.sendFile('/home/davidweisss/reactApp/src/client/index.html')

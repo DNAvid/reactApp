@@ -1,15 +1,42 @@
+import { Redirect } from 'react-router-dom'
 import React, { Component } from 'react'
-import { InitSetPseudo } from '../actions.jsx'
+import { connect } from 'react-redux'
+import { setSession, fetchPseudo} from '../actions.jsx'
+import { Link } from 'react-router-dom'
 
-export default class Callback extends Component {
-        render() {
+const mapStateToProps=(state, props)=>({isAuthenticated: state.session.isAuthenticated})
 
-                return (
+const mapDispatchToProps=(dispatch)=>({
+	setSession:(args)=> dispatch(setSession(args))
+})
 
-                <div className='container'> 
-                        Loading...
-                </div>
-                );
-        }
+class CallbackNC extends React.Component{
+	
+	componentWillMount(){
+		if (/access_token|id_token|error/.test(location.hash)) {
+			this.props.webAuth.parseHash((err, authResult) => {
+				if (authResult && authResult.accessToken && authResult.idToken) {
+					this.props.setSession(authResult);
+				} else if (err) {
+					console.log(err);
+					alert(`Error: ${err.error}. Check the console for further details.`);
+				}
+			});
+		}
+
+	}
+	render(){	
+		var isAuthenticated = this.props.isAuthenticated
+		return (
+			<div>
+			{ isAuthenticated &&
+			<Redirect to='/home'/>
+			}
+		</div>
+		)
+	}
 }
+const Callback = connect(mapStateToProps, mapDispatchToProps)(CallbackNC)
+
+export default Callback
 

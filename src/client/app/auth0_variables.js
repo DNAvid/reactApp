@@ -1,6 +1,6 @@
 export const AUTH_CONFIG = {
           domain: 'dnavid.auth0.com',
           clientId: 'DKYRjMDoaLlPwmdDcGWGshIHFuwXwtMZ',
-        callbackUrl: 'https://dnavid.com/callback',
+        callbackUrl: 'https://dev.dnavid.com/callback'
 }
 

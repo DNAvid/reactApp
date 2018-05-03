@@ -1,4 +1,4 @@
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider, connect } from 'react-redux'
 import  { render } from 'react-dom'
@@ -6,202 +6,138 @@ import React, { Component } from 'react'
 import { Router, Route, Link, Redirect } from 'react-router-dom'
 import history from './history'
 //import loading from './loading.svg'
-import auth0 from 'auth0-js'
-import { AUTH_CONFIG } from './auth0_variables'
 
 import  App from './Containers/App.jsx'
 import  Home from './Containers/Home.jsx'
 import  Wallet from './Containers/Wallet.jsx'
-import  Callback from './Containers/Callback.jsx'
-import  Login from './Containers/Login.jsx'
+import  { Login, LearnMore } from './Containers/Login.jsx'
 import  Pseudo from './Containers/Pseudo.jsx'
+import Logout from './Containers/Logout.jsx'
+import Callback from './Containers/Callback.jsx'
+import UserGet from './Containers/UserGet.jsx'
 
 import  rootReducer  from './reducers.jsx'
-import { setSession,
-        setSessionFromLocalStorage,
-        fetchPseudo,
-        deletePseudo,
-        setUserDetail,
-        getUserDetail,
-        logout
+
+import { 
+	trySetSessionFromLocalStorage,
+	logout,
+	login
 } from './actions.jsx'
 
-// From Auth0 
+import auth0 from 'auth0-js'
+import { AUTH_CONFIG } from './auth0_variables'
+
 var webAuth = new auth0.WebAuth({
-        domain: AUTH_CONFIG.domain,
-        clientID: AUTH_CONFIG.clientId,
-        redirectUri: AUTH_CONFIG.callbackUrl,
-        audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-        responseType: 'token id_token',
-        scope: 'openid'
-});
+	domain: AUTH_CONFIG.domain,
+	clientID: AUTH_CONFIG.clientId,
+	redirectUri: AUTH_CONFIG.callbackUrl,
+	audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+	responseType: 'token id_token',
+	scope: 'openid'
+})
 
 // Create state management store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, 
-        composeEnhancers(applyMiddleware(thunk)));
+	composeEnhancers(applyMiddleware(thunkMiddleware)));
 
-// Use local session on reload
-if (typeof localStorage.getItem('expires_at') !== 'undefined' && 
-        JSON.parse(localStorage.getItem('expires_at')) > new Date().getTime()){
-        store.dispatch(setSessionFromLocalStorage())
-        store.dispatch(fetchPseudo(localStorage.getItem('id_token')))
-}
-
-// Handle after redirection from authentication service
-const handleAuthentication = ({location}) => {
-        if (/access_token|id_token|error/.test(location.hash)) {
-                webAuth.parseHash((err, authResult) => {
-                        if (authResult && authResult.accessToken && authResult.idToken) {
-                                store.dispatch(setSession(authResult));
-                                store.dispatch(fetchPseudo(authResult.idToken))
-                                history.replace('/home');
-                        } else if (err) {
-                                debugger;
-                                history.replace('/home');
-                                console.log(err);
-                                alert(`Error: ${err.error}. Check the console for further details.`);
-                        }
-                });
-
-        }
-}
-
-class LearnMore  extends React.Component {
-        render(){
-                return(
-                        <div className='container'>
-                        <h1>Concepts</h1> 
-                        <ol>
-                                <li>DNA+Bitcoin</li>
-                                <li>Human rights</li>
-                        </ol>
-                        <Link to='/'>Back</Link>
-                        </div>
-                )
-        }
-}
-
-const mapStateToProps = state => ({
-        session: state.session,
-        user: state.user
+const mapStateToProps = (state, props) => ({
+	user: state.user,
+	session: state.session
 })
 
-const mapDispatchToProps = {
-        deletePseudo: deletePseudo,
-        setUserDetail: setUserDetail,
-        getUserDetail: getUserDetail,
-        logout: logout,
-        login: ()=> {webAuth.authorize()}
+const mapDispatchToProps =(dispatch)=>({
+	setSession: (args)=> dispatch(setSession(args)),
+	getUser: (args)=>dispatch(getUser(args)),
+	trySetSessionFromLocalStorage:()=>dispatch(trySetSessionFromLocalStorage())
+})
+class RedirectToAuth0 extends React.Component{
+	render(){	
+		this.props.webAuth.authorize()
+		return (null)
+	}
 }
 
 class ContainerNC extends React.Component {
-        render(){
-                // Dispatch=wrapped action creators
-                var {
-                        deletePseudo,
-                        setUserDetail,
-                        getUserDetail,
-                        logout,
-                        login
-                }  = this.props
-                // App level
-                var {
-                        store,
-                        webAuth,
-                        history,
-                } = this.props
 
-                var {
-                        isAuthenticated,
-                        id_token,      
-                        isFetching,    
-                        pseudo        
-                } = this.props.session
+	componentWillMount(){
+		if (typeof localStorage.getItem('expires_at') !== 'undefined' && 
+			JSON.parse(localStorage.getItem('expires_at')) > new Date().getTime()){
 
-                // Module-level
-                var { user, session } = this.props
-
-                const emptyPseudo =  !Boolean(pseudo.length) 
-
-                return (
-                        <Provider store={store}>
-                                <Router history={history}>
-                                        <div>
-                                                <Route path="/" render={(props) => 
-                                                        <App 
-                                                                login={login}
-                                                                logout={logout}
-                                                                isAuthenticated={isAuthenticated}
-                                                        {...props} />} />
-                                        <Route path="/" exact={true} render={(props) => 
-                                                <Login 
-                                                        login={login} 
-                                                        logout={logout} 
-                                                        isAuthenticated={isAuthenticated}
-                                                        {...props} />}  />
-                                        <Route path="/splash" render={(props) => 
-                                                <Login 
-                                                        login={login} 
-                                                        logout={logout} 
-                                                        isAuthenticated={isAuthenticated}
-                                                        {...props} />} />
-                                        <Route path="/splash/learnmore" exact={true} render={(props) => <LearnMore webAuth={webAuth} {...props} />} />
-
-                                        { isFetching && 
-                                
-                                        <Route path="/home" render={(props) =>
-                                        <h4>Retrieving your info (if you have provided it).</h4> }/>}
-
-                                                
-                                        { !isFetching && isAuthenticated && emptyPseudo &&
-                                        <Route path="/home" render={(props) =>
-                                        <Pseudo /> }/>}
-
-                                        { !isFetching && !isAuthenticated && 
-                                        <Route path="/home" render={(props) =>
-                                        <h4>
-                                                You are not logged in! Please{' '}
-                                                <a
-                                                        style={{ cursor: 'pointer' }}
-                                                        onClick={login.bind(this)}
-                                                >
-                                                        Log In
-                                                </a>
-                                                {' '}to continue.
-                                        </h4>
-                                        }/>} 
-
-                                        { !isFetching && isAuthenticated && !emptyPseudo &&
-                                        <Route path="/home" render={(props) =>
-                                                <Home 
-                                                        user=  {user}
-                                                        session= {session}
-                                                        deletePseudo={deletePseudo}
-                                                        setUserDetail={setUserDetail}
-                                                        getUserDetail={getUserDetail}
-                                                        {...props}/>} /> }
+			this.props.trySetSessionFromLocalStorage()
+		}	
+		var {
+			isAuthenticated,
+			isRegistered,
+			isFetching,    
+			id_token,
+		} = this.props.session
+		if(isAuthenticated && !isRegistered ){
+			this.props.getUser(id_token)
+		}
+	}
 
 
-                                        <Route path="/wallet" render={(props) => 
-                                                <Wallet 
-                                                        user=  {user}
-                                                        session= {session}
-                                                {...props}/>} /> 
-                                        <Route path="/callback" render={(props) => {
-                                                handleAuthentication(props);
-                                                return <Callback {...props} /> }} />
-                                </div>
-                        </Router>
-                </Provider>
-                )
-        }
+	render(){
+		var {
+
+			store,
+			history,
+			webAuth
+		} = this.props
+
+		var {
+			isAuthenticated,
+			isInitialized,
+			isRegistered,
+			isFetching,    
+			id_token      
+		} = this.props.session
+
+		return (
+			<Provider store={store}>
+				<Router history={history}>
+					<div>
+						<Route path="/" render={ () => <App/>} />
+						<Route path="/" exact={true} render={ () => <Login/>}  />
+						<Route path="/splash" render={ () => <Login/>} />
+						<Route path="/splash/learnmore" exact={true} render={() => <LearnMore/>} />
+						<Route path="/callback" render= { () => <Callback webAuth={webAuth}/>}/>
+						<Route path="/login" render= { () => <RedirectToAuth0 webAuth={webAuth}/>}/>
+						<Route path='/logout' render= { () => <div><Logout/><Redirect to='/'/></div>}/>
+
+						{ !isInitialized && <UserGet/> }
+
+						{ !isAuthenticated && <Route path="/home" render={()=><h4>There is no personal info of you.</h4>} />}
+
+						{ isAuthenticated  &&
+						<div>
+
+							{ isRegistered &&
+							<div>
+								<Route path="/home" render={ () => <Home/>}/>
+								<Route path="/wallet" render={ () => <Wallet/>}/> 
+							</div>}
+							{ !isRegistered && isInitialized && !isFetching &&
+							<div>
+								<Route path="/home" render={ props => <Redirect to='/pseudo'/>}/>
+							</div>
+							}
+
+						</div>
+						}
+						<Route path='/pseudo' render= { () => <Pseudo/>}/>
+					</div>
+				</Router>
+			</Provider>
+			)
+	}
 }
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(ContainerNC)
 
 render(
-        <Container webAuth={webAuth} store={store} history={history}/>,
-        document.getElementById('root')
+	<Container webAuth={webAuth} history={history} store={store}/>,
+	document.getElementById('root')
 );
 

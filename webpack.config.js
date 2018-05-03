@@ -5,17 +5,10 @@ var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 var APP_DIR = path.resolve(__dirname, 'src/client/app');
 
 var config = {
-        entry: APP_DIR + '/index.jsx',
+	entry: [APP_DIR + '/index.jsx', 'webpack-hot-middleware/client'],
         output: {
                 path: BUILD_DIR,
                 filename: 'bundle.js'
-        },
-        devServer: {
-                public: 'reactapp.cloud:443',
-                host: '0.0.0.0',
-                port: 443,
-                contentBase: 'src/client/',
-                compress: true,
         },
         module : {
                 rules: [
@@ -28,11 +21,14 @@ var config = {
         },
         mode: 'development',
         devtool: "#cheap-module-source-map",
-        plugins: [
-                     new webpack.LoaderOptionsPlugin({
-                                    debug: true
-                                  })
-                   ]
+	plugins: [
+		new webpack.LoaderOptionsPlugin({
+			debug: true
+		}),
+		new webpack.HotModuleReplacementPlugin(),
+		// Use NoErrorsPlugin for webpack 1.x
+		new webpack.NoEmitOnErrorsPlugin()
+	]
 };
 
 module.exports = config;
